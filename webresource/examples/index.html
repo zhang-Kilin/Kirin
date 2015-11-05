@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../../libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="list">
+							<div class="btn-group-vertical">
+								<a href="alert.html" class="btn btn-default btn-lg">UIAlert</a>
+								<a href="confirm.html" class="btn btn-default btn-lg">UIConfirm</a>
+								<a href="list.html" class="btn btn-default btn-lg">UIList</a>
+								<a href="loading.html" class="btn btn-default btn-lg">UILoading</a>
+								<a href="select.html" class="btn btn-default btn-lg">UISelect</a>
+								<a href="selectgroup.html" class="btn btn-default btn-lg">UISelectGroup</a>
+								<a href="toast.html" class="btn btn-default btn-lg">UIToast</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		<script src="../config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'Component Example',
+						handles:{
+							onback:function(){
+//								location.assign('index.html');
+							}
+						}
+					});
+				})
+			});
+		</script>
+	</body>
+
+</html>

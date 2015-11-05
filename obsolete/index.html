@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="webresource/css/main.css" />
+		<script src="libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="libs/react.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/react-dom.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+			</div>
+			<div id="footer" class="footer">
+			</div>
+
+			<a id="alert" href="javascript:;" class="btn btn-default">Alert</a>
+			<a id="loading" href="javascript:;" class="btn btn-default">Loading</a>
+			<a id="confirm" href="javascript:;" class="btn btn-default">Confirm</a>
+			<a id="toast" href="javascript:;" class="btn btn-default">Toast</a>
+			<a id="list" href="javascript:;" class="btn btn-default">List</a>
+			<a id="select" href="javascript:;" class="btn btn-default">Select</a>
+			<a id="select-group" href="javascript:;" class="btn btn-default">SelectGroup</a>
+			
+		</div>
+		<div id="components">
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		<script src="webresource/config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var items = [{
+						text: '中国',
+						value: 0
+					}, {
+						text: '越南',
+						value: 4
+					}, {
+						text: '蒙古',
+						value: 1
+					}, {
+						text: '韩国',
+						value: 2
+					}, {
+						text: '朝鲜',
+						value: 3
+					}];
+//				require(['Select'],function(Select){
+//					var select = new Select();
+//					$('#select').click(function(){
+//						select.show(items,function(item){
+//							console.log(item);
+//							this.hide();
+//						});
+//					});
+//				});
+//				
+//				require(['SelectGroup'],function(SelectGroup){
+//					var group = new SelectGroup({
+//						children:[items,items,items]
+//					});
+//					$('#select-group').click(function(){
+//						group.show(function(items){
+//							console.log(JSON.stringify(items));
+//						});
+//					});
+//				})
+//				require(['react','react-dom', 'jsx.UISelectGroup'],function(React,ReactDOM, UISelectGroup){
+//					var factory = React.createFactory(UISelectGroup);
+//					var group = ReactDOM.render(factory({
+//						fade:true,
+//						show:true,
+//						children:[items,items,items],
+//						onitemchange:function(item,index){
+//							console.log(item,"  ",index);
+//						},
+//						onchange:function(items){
+//							console.log(items);
+//						}
+//					}),$('#select-group')[0])
+//				})
+//				require(['react', 'react-dom', 'jsx.UISelect'], function(React, ReactDOM, UISelect) {
+//					
+//					var factory = React.createFactory(UISelect);
+//					var select = ReactDOM.render(factory({
+//						children: children
+//					}), $('#select')[0]);
+//					var ul = $('#select').find('ul');
+//					setTimeout(function() {
+////						ul.css({
+//////							'transition-timing-function': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+////							'margin-top':'-44px',
+////							'transition-duration': '150ms',
+////							'transform': 'translateY(0px)'
+////						});
+////						setTimeout(function(){
+////							ul.css({
+////								'transition-duration': '150ms',
+////								'transform': 'translateY(-132px)'
+////							})	
+////						},1500);
+//						
+////						.css({
+////							'transition-duration': '200ms'
+////						}).css({
+////							'transform': 'translateY(-44px)'
+////						});
+//					}, 3000);
+//				});
+//				require(['Header'], function(Header) {
+//					var header = new Header({
+//						toolbar: 'home',
+//						handles: {
+//							onback: function() {
+//								console.log('back');
+//							},
+//							onhome: function() {
+//								console.log('home');
+//							}
+//						}
+//					});
+//					header.show('Hello world', ['home', 'msg'], {
+//						onhome: function() {
+//							header.reset();
+//						}
+//					});
+//				});
+//				require(['Alert'], function(Alert) {
+//					var a = new Alert({
+//						fade: true,
+//						backdrop: true,
+//						keybord: true
+//					});
+//					$('#alert').click(function() {
+//						a.show({
+//							children: '试下Alert',
+//							title: 'Hello wrold'
+//						}, function() {
+//							console.log('alert on hide');
+//						});
+//					});
+//				});
+//				require(['Loading'], function(Loading) {
+//					var loading = new Loading({
+//						backdrop: true,
+//						keybord: true
+//					});
+//					$('#loading').click(function() {
+//						loading.show({
+//							children: ''
+//						}, 2500);
+//					});
+//				});
+//				require(['Confirm'], function(Confirm) {
+//					var con = new Confirm({
+//						backdrop: true,
+//						keybord: true,
+//						fade: true
+//					});
+//					$('#confirm').click(function() {
+//						con.show('啦啦啦啦啦，我是Confirm', function() {
+//							this.hide();
+//							console.log('ok');
+//						}, function() {
+//							console.log('cancel');
+//						});
+//					})
+//				});
+//				require(['Toast'], function(Toast) {
+//					var toast = new Toast({
+//						fade: true
+//					});
+//					$('#toast').click(function() {
+//						toast.show('hello world', function() {
+//							console.log('toast hidden');
+//						});
+//					})
+//				});
+//				require(['List'], function(List) {
+//					var list = new List({
+//						fade: false
+//					});
+//					$('#list').click(function() {
+//						list.show(['Hello world'], function(item) {
+//							console.log(item);
+//						}, function() {
+//							console.log('hidden list');
+//						});
+//					});
+//				});
+				//				require(['Loading'],function(Loading){
+				//					var loading = new Loading({
+				//						fade:true,
+				//						backdrop:true,
+				//						keybord:true
+				//					});
+				//					setTimeout(function(){
+				//						loading.show(1500);
+				//					},2000);
+				//				})
+				//				setTimeout(function(){
+				//					$('#myModal').show();
+				//					setTimeout(function(){
+				//						$('#myModal').addClass('in');
+				//					},1)
+				//				},1000);
+				//				require(['UILayer','react','react-dom'],function(UILayer,React,ReactDOM){
+				//					var layerFactory = React.createFactory(UILayer);
+				//					var layer = ReactDOM.render(layerFactory({
+				//						fade:false,
+				//						children:React.createElement('div',{style:{width:"500px",height:"400px"}})
+				//					}),$('#layer')[0]);
+				//					layer.setProps({show:true});
+				//					setTimeout(function(){
+				//						layer.setProps({show:false});
+				//					},3000);
+				//				});
+			});
+			$(function() {
+				//				require(['UIToast', 'UILoading', 'UIBackdrop', 'UILayer', 'UIModal', 'react', 'react-dom'],
+				//					function(UIToast, UILoading, UIBackdrop, UILayer, UIModal, React, ReactDOM) {
+				//						var layerFactory = React.createFactory(UILayer);
+				//						var backdropFactory = React.createFactory(UIBackdrop);
+				//						var loadingFactory = React.createFactory(UILoading);
+				//						var modalFactory = React.createFactory(UIModal);
+				//						var toastFactory = React.createFactory(UIToast);
+				//						var backdrop = ReactDOM.render(backdropFactory(), $('#backdrop')[0]);
+				//						//						var layer = ReactDOM.render(layerFactory({
+				//						//							fade: true,
+				//						//							show:true,
+				//						//							backdrop:backdrop,
+				//						//							keybord:true,
+				//						//							children: React.createElement('div', {
+				//						//								style: {
+				//						//									width: "500px",
+				//						//									height: "400px"
+				//						//								}
+				//						//							})
+				//						//						}), $('#layer')[0]);
+				//						var toast = ReactDOM.render(toastFactory(), $('#toast')[0]);
+				//						var loading = ReactDOM.render(loadingFactory({
+				//							show: true
+				//								//						,
+				//								//						backdrop: backdrop,
+				//								//						keybord: true
+				//						}), $('#layer')[0]);
+				//						setTimeout(function() {
+				//							loading.setProps({
+				//								show: false
+				//							});
+				//							toast.setProps({
+				//								show: true,
+				//								backdrop: backdrop,
+				//								keybord: true,
+				//								onkeybord: function() {
+				//									toast.setProps({
+				//										show: false
+				//									})
+				//								},
+				//								children: '我是Toast，hello 大家好'
+				//							})
+				//						}, 3000);
+				//						var modal = ReactDOM.render(modalFactory({
+				//							show: true,
+				//							children: '此路是我开，此树是我栽，要想过此路，留下买路钱',
+				//							backdrop: backdrop,
+				//							keybord: true,
+				//							onkeybord: function() {
+				//								modal.setProps({
+				//									show: false
+				//								});
+				//							}
+				//						}), $('#modal')[0]);
+				//					})
+			})
+			 $(function() {
+				//				require(['react', 'react-dom'], function(React, ReactDOM) {
+				//					require(['UIViewContainer', 'UIHeaderContainer', 'UIToolbars'], function(UIView, UIHeader, UIToolbars) {
+				//						UIToolbars.setting({
+				//							icon: 'camera',
+				//							text: '来个快照'
+				//						});
+				//						UIToolbars.setting([{
+				//							icon: 'download-alt',
+				//							alias: ['download-alt', 'download'],
+				//							text: '下载'
+				//						}]);
+				//						var factoryView = React.createFactory(UIView),
+				//							factoryHeader = React.createFactory(UIHeader);
+				//						var uiheader = ReactDOM.render(factoryHeader({
+				//							onshow: function() {
+				//								console.log('header show');
+				//							},
+				//							onhide: function() {
+				//								console.log('header hide');
+				//							},
+				//							title: '首页',
+				//							//						toolbar: ['home', 'edit', {
+				//							//							icon: 'share',
+				//							//							isMoreMenu: true
+				//							//						}, {
+				//							//							icon: 'phone',
+				//							//							isMoreMenu: true
+				//							//						}, {
+				//							//							icon: 'login',
+				//							//							isMoreMenu: true
+				//							//						}, {
+				//							//							icon: 'logout',
+				//							//							isMoreMenu: true
+				//							//						}],
+				//							toolbar: ['home', 'edit', 'plus', 'calendar', 'share', 'phone', 'login', 'logout', 'setting', 'refresh', 'user', 'delete', 'barcode', 'qrcode', 'heart', 'search', 'favorite', 'print', 'email', 'camera', 'download'],
+				//							handles: {
+				//								onback: function() {
+				//									console.log('back');
+				//								},
+				//								onhome: function() {
+				//									console.log('home');
+				//								},
+				//								onearphone: function() {
+				//									console.log('earphone');
+				//								},
+				//								onphone: function() {
+				//									console.log('phone');
+				//								},
+				//								onshare: function() {
+				//									console.log('share')
+				//								},
+				//								onedit: function() {
+				//									console.log('edit');
+				//								},
+				//								oncalendar: function() {
+				//									console.log('calendar');
+				//								},
+				//								onplus: function() {
+				//									console.log('plus add new');
+				//								},
+				//								onlogin: function() {
+				//									console.log('login');
+				//								},
+				//								onlogout: function() {
+				//									console.log('logout');
+				//								},
+				//								onsetting: function() {
+				//									console.log('setting');
+				//								},
+				//								onrefresh: function() {
+				//									console.log('refresh');
+				//								},
+				//								onuser: function() {
+				//									console.log('user');
+				//								},
+				//								ondelete: function() {
+				//									console.log('trash delete del remove');
+				//								},
+				//								onbarcode: function() {
+				//									console.log('barcode');
+				//								},
+				//								onqrcode: function() {
+				//									console.log('qrcode');
+				//								},
+				//								onheart: function() {
+				//									console.log('heart');
+				//								},
+				//								onsearch: function() {
+				//									console.log('search');
+				//								},
+				//								onfavorite: function() {
+				//									console.log('favorite start-empty');
+				//								},
+				//								onprint: function() {
+				//									console.log('print');
+				//								},
+				//								onemail: function() {
+				//									console.log('email mail message msg envelope');
+				//								},
+				//								oncamera: function() {
+				//									console.log('camera');
+				//								},
+				//								ondownload: function() {
+				//									console.log('download');
+				//								}
+				//							}
+				//						}), $('#header')[0]);
+				//						var props = {
+				//							onshow: function() {
+				//								console.log('show');
+				//							},
+				//							onhide: function() {
+				//								console.log('hide');
+				//							},
+				//							children: 'Hello world'
+				//						}
+				//						var uiview = ReactDOM.render(factoryView(props), $('#viewport')[0]);
+				//						setTimeout(function() {
+				//							uiheader.setProps({
+				//								title: 'Index'
+				//							})
+				//						}, 3000)
+				//					});
+				//				});
+			});
+		</script>
+	</body>
+
+</html>

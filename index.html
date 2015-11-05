@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="webresource/css/main.css" />
+		<script src="libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+			</div>
+			<div id="footer" class="footer">
+			</div>
+
+			<a id="alert" href="javascript:;" class="btn btn-default">Alert</a>
+			<a id="loading" href="javascript:;" class="btn btn-default">Loading</a>
+			<a id="confirm" href="javascript:;" class="btn btn-default">Confirm</a>
+			<a id="toast" href="javascript:;" class="btn btn-default">Toast</a>
+			<a id="list" href="javascript:;" class="btn btn-default">List</a>
+			<a id="select" href="javascript:;" class="btn btn-default">Select</a>
+			<a id="select-group" href="javascript:;" class="btn btn-default">SelectGroup</a>
+			
+		</div>
+		<div id="components">
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		<script src="webresource/config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var items = [{
+						text: '中国',
+						value: 0
+					}, {
+						text: '越南',
+						value: 4
+					}, {
+						text: '蒙古',
+						value: 1
+					}, {
+						text: '韩国',
+						value: 2
+					}, {
+						text: '朝鲜',
+						value: 3
+					}];
+				require(['UIAlert'],function(UIAlert){
+					var uiAlert = new UIAlert();
+					uiAlert.on('hidden',function(){
+						console.log('hidden')
+					})
+					uiAlert.on('shown',function(){
+						console.log('shown')
+					})
+					$('#alert').click(function(){
+						uiAlert.show("开关热i哦我附件的思考过",function(){
+							console.log('hidden.alert.component');
+						});
+						
+					})
+				})
+			});
+		</script>
+	</body>
+
+</html>

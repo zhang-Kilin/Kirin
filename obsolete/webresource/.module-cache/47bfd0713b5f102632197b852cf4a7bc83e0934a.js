@@ -1,0 +1,11 @@
+/* 
+ * @description 背景遮罩
+ * @author zhanghh@ctrip.com
+ * @createtime 2015-10-26
+ * @version 0.1
+ * @modify 
+ * 		zhanghh@ctrip 2015-10-26
+ */
+define('UIBackdrop', ['react'], function(React) {
+	
+});

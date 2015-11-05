@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../../libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="example-title">
+							<h2>Alert弹窗</h2>
+						</div>
+						<p class="example-description">
+							基本用法，带半透明遮罩，动画
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="alert" class="btn btn-default">Alert</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var normalAlert = new UIAlert();
+$('#alert').click(function(){
+	normalAlert.show("开关热i哦我附件的思考过");
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					<div class="example">
+						<div class="example-title">
+							<h2>Title</h2>
+						</div>
+						<p class="example-description">
+							有标题栏的UIAlert，如果title为空，则不显示标题栏
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="alert-title" class="btn btn-default">Alert</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var titleAlert = new UIAlert();
+$('#alert-title').click(function() {
+	titleAlert.show("带Title的UIAlert",'UIAlert Title');
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					<div class="example">
+						<div class="example-title">
+							<h2>Options</h2>
+						</div>
+						<p class="example-description">
+							通过options参数配置alert
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="alert-options" class="btn btn-default">Alert</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var optionAlert = new UIAlert({
+	//是否开启动画效果
+	fade: false,
+	//是否有半透明遮罩
+	backdrop: false,
+	//遮罩是否响应点击关闭事件
+	keybord: false
+});
+$('#alert-options').click(function() {
+	optionAlert.show("开关热i哦我附件的思考过");
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					<div class="example">
+						<div class="example-title">
+							<h2>Callback</h2>
+						</div>
+						<p class="example-description">
+							响应关闭后的回调函数，注意 <span class="text-danger">如果有动画效果，则回调函数会在动画执行之前就被触发，如果需要监听动画完全执行完毕的事件，请参见 <a href="#event">event</a></span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="alert-callback" class="btn btn-default">Alert</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var callbackAlert = new UIAlert();
+$('#alert-callback').click(function() {
+	callbackAlert.show("响应回调函数的用法",function(){
+		alert('回调函数响应');
+	});
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>Event</h2>
+						</div>
+						<p class="example-description">
+							监听UIAlert事件
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="alert-event" class="btn btn-default">Alert</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var eventAlert = new UIAlert();
+eventAlert.on('hidden',function(){
+	alert('hidden');
+});
+eventAlert.on('shown',function(){
+	alert('shown');
+});
+$('#alert-event').click(function() {
+	eventAlert.show("UIAlert事件监听",function(){
+		alert('回调函数')
+	});
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					<div class="example">
+						<div class="example-title">
+							<h2>高级用法</h2>
+						</div>
+						<p class="example-description">
+							定制化按钮、定制化内容
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="alert-btn" class="btn btn-default">Alert</button>
+								<button id="alert-custom" class="btn btn-default">Custom Alert</button>
+							</div>
+							<div class="example-code">
+								<pre>
+//自定义按钮
+var btnAlert = new UIAlert({
+	buttons:[
+		{
+			text:'确定',
+			handle:function(){
+				btnAlert.hide();
+			}
+		}
+	]
+});
+$('#alert-btn').click(function(){
+	btnAlert.show('高级参数的UIAlert，自定义按钮');
+});
+
+//自定义内容UIAlert
+var customAlert = new UIAlert();
+$('#alert-custom').click(function(){
+	var content = React.createElement('span',{className:'text-danger',style:{fontSize:'22px'}},'自定义内容UIAlert');
+	customAlert.show(content);
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		<script src="../config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'UIAlert',
+						toolbar:'home',
+						handles:{
+							onhome:function(){
+								location.assign('index.html');
+							},
+							onback:function(){
+								location.assign('index.html');
+							}
+						}
+					});
+				})
+			});
+			$(function() {
+				require(['UIAlert','react'], function(UIAlert,React) {
+					
+					var normalAlert = new UIAlert();					
+					$('#alert').click(function() {
+						normalAlert.show("这是UIAlert的基本用法");
+					});
+					
+					var titleAlert = new UIAlert();
+					$('#alert-title').click(function() {
+						titleAlert.show("带Title的UIAlert",'UIAlert Title');
+					});
+					
+					var optionAlert = new UIAlert({
+						//是否开启动画效果
+						fade: false,
+						//是否有半透明遮罩
+						backdrop: false,
+						//遮罩是否响应点击关闭事件
+						keybord: false
+					});
+					$('#alert-options').click(function() {
+						optionAlert.show("带options参数的用法");
+					});
+					
+					var callbackAlert = new UIAlert();
+					$('#alert-callback').click(function() {
+						callbackAlert.show("响应回调函数的用法",function(){
+							alert('回调函数响应');
+						});
+					});
+					
+					var eventAlert = new UIAlert();
+					eventAlert.on('hidden',function(){
+						alert('hidden');
+					});
+					eventAlert.on('shown',function(){
+						alert('shown');
+					});
+					$('#alert-event').click(function() {
+						eventAlert.show("UIAlert事件监听",function(){
+							alert('回调函数')
+						});
+					});
+					
+					//自定义按钮
+					var btnAlert = new UIAlert({
+						buttons:[
+							{
+								text:'确定',
+								handle:function(){
+									btnAlert.hide();
+								}
+							}
+						]
+					});
+					$('#alert-btn').click(function(){
+						btnAlert.show('高级参数的UIAlert，自定义按钮');
+					});
+					
+					//自定义内容UIAlert
+					var customAlert = new UIAlert();
+					$('#alert-custom').click(function(){
+						var content = React.createElement('span',{className:'text-danger',style:{fontSize:'22px'}},'自定义内容UIAlert');
+						customAlert.show(content);
+					});
+				})
+			});
+		</script>
+	</body>
+
+</html>

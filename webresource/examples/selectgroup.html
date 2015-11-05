@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../../libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="example-title">
+							<h2>Select Group</h2>
+						</div>
+						<p class="example-description">
+							select下拉选择框组，基本用法，多个select组合
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var year = [
+	{text:'1990年',value:1990},
+	{text:'1991年',value:1991},
+	{text:'1992年',value:1992},
+	{text:'1993年',value:1993},
+	{text:'1994年',value:1994},
+	{text:'1995年',value:1995},
+	{text:'1996年',value:1996},
+	{text:'1997年',value:1997},
+	{text:'1998年',value:1998},
+	{text:'1999年',value:1999},
+	{text:'2001年',value:2001},
+	{text:'2002年',value:2002},
+	{text:'2003年',value:2003},
+	{text:'2004年',value:2004},
+	{text:'2005年',value:2005},
+	{text:'2006年',value:2006},
+	{text:'2007年',value:2007},
+	{text:'2008年',value:2008},
+	{text:'2009年',value:2009},
+	{text:'2010年',value:2010},
+	{text:'2011年',value:2011},
+	{text:'2012年',value:2012},
+	{text:'2013年',value:2013},
+	{text:'2014年',value:2014},
+	{text:'2015年',value:2015},
+];
+var month = [
+	{text:'1月',value:1},
+	{text:'2月',value:2},
+	{text:'3月',value:3},
+	{text:'4月',value:4},
+	{text:'5月',value:5},
+	{text:'6月',value:6},
+	{text:'7月',value:7},
+	{text:'8月',value:8},
+	{text:'9月',value:9},
+	{text:'10月',value:10},
+	{text:'11月',value:11},
+	{text:'12月',value:12}
+];
+var day = [
+	{text:'1',value:1},
+	{text:'2',value:2},
+	{text:'3',value:3},
+	{text:'4',value:4},
+	{text:'5',value:5},
+	{text:'6',value:6},
+	{text:'7',value:7},
+	{text:'8',value:8},
+	{text:'9',value:9},
+	{text:'10',value:10},
+	{text:'11',value:11},
+	{text:'12',value:12},
+	{text:'13',value:13},
+	{text:'14',value:14},
+	{text:'15',value:15},
+	{text:'16',value:16},
+	{text:'17',value:17},
+	{text:'18',value:18},
+	{text:'19',value:19},
+	{text:'20',value:20},
+	{text:'21',value:21},
+	{text:'22',value:22},
+	{text:'23',value:23},
+	{text:'24',value:24},
+	{text:'25',value:25},
+	{text:'26',value:26},
+	{text:'27',value:27},
+	{text:'28',value:28},
+	{text:'29',value:29},
+	{text:'30',value:30},
+	{text:'31',value:31}
+];
+var normal = new UISelectGroup({
+	children:[year,month,day]
+});					
+$('#select').click(function() {
+	normal.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>onchnage</h2>
+						</div>
+						<p class="example-description">
+							监听select group的change事件，获取当前选择的items，注意 <span class="text-danger">只有当点击“确定”按钮时才会触发change事件</span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-change" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var change = new UISelectGroup({
+	children:[year,month,day]
+});
+change.on('change',function(items){
+	//the parameter of 'items',it like this 
+	/*
+	 * [{text:'1990',value:1990},{text:'2月',value:2},{text:'5',value:5}]
+	 */
+	alert(JSON.stringify(items));
+	this.hide();
+});
+$('#select-change').click(function() {
+	change.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>value</h2>
+						</div>
+						<p class="example-description">
+							获取select group当前选中的items
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-value" class="btn btn-default">show select</button>
+								<button id="get-value" class="btn btn-default">get select value</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var value = new UISelectGroup({
+	children:[year,month,day]
+});					
+value.on('change',function(items){
+	alert(JSON.stringify(items));
+});
+$('#select-value').click(function() {
+	value.show();
+});
+$('#get-value').click(function(){
+	alert(JSON.stringify(value.value()));
+	value.hide();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					
+					<div class="example">
+						<div class="example-title">
+							<h2>selected</h2>
+						</div>
+						<p class="example-description">
+							通过设置item的属性selected=true，指定当前选中某一个item
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-selected" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var yearClone = _.extend({},year),
+	monthClone = _.extend({},month),
+	dayClone = _.extend({},day);
+yearClone[3].selected = true;
+monthClone[3].selected = true;
+dayClone[3].selected = true;
+var selected = new UISelectGroup({
+	children:[yearClone,monthClone,dayClone]
+});					
+$('#select-selected').click(function() {
+	selected.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Options</h2>
+						</div>
+						<p class="example-description">
+							通过设置options参数，改变select group的显示方式
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-options" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var options = new UISelectGroup({
+	//是否开启动画效果
+	fade: false,
+	//是否有半透明遮罩
+	backdrop: false,
+	//遮罩是否响应点击关闭事件
+	keybord: false,
+	//数据
+	children:[year,month,day]
+});
+options.on('change',function(items){
+	alert(JSON.stringify(items));
+	this.hide();
+})
+$('#select-options').click(function() {
+	options.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>Event</h2>
+						</div>
+						<p class="example-description">
+							监听select group的事件
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-event" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var evt = new UISelectGroup({
+	children:[year,month,day]
+});
+evt.on('shown',function(){
+	alert('shown');
+});
+evt.on('hidden',function(){
+	alert('hidden');
+});
+$('#select-event').click(function(){
+	evt.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>高级应用</h2>
+						</div>
+						<p class="example-description">
+							监听<span class="text-danger">itemchange</span>，并使用<span class="text-danger">refresh</span> api，
+							实现局部刷新，达到各select之间的联动
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-itemchange" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+function getDaysOfMonth(year,month,selectedDay){
+	var max = 31;
+	switch(month){
+		case 2:
+			max = year % 4 == 0 && year % 100 != 0 ? 29 : 28;
+			break;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			max = 30;
+			break;
+	}
+	var results = [],
+		item,
+		flag = false;
+	for(var i = 1; i <= max; i++){
+		item = {
+			text:i.toString(),
+			value:i
+		};
+		if(i === selectedDay){
+			flag = true;
+			item.selected = true;
+		}
+		results.push(item);
+	}
+	if(!flag){
+		results[results.length-1].selected = true;
+	}
+	return results;
+}
+
+var itemchange = new UISelectGroup({
+	children:{year:year,month:month,day:getDaysOfMonth(1993,4,30)}
+});
+itemchange.on('itemchange',function(item,name){
+	if(name == 'year' || name == 'month'){
+		var results = this.value(),
+			y = results['year'].value,
+			m = results['month'].value,
+			d = results['day'].value;
+		var days = getDaysOfMonth(y,m,d);
+		//局部数据刷新
+		this.refresh('day',days);
+	}
+});
+$('#select-itemchange').click(function(){
+	itemchange.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		<script src="../config.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'UISelectGroup',
+						toolbar:'home',
+						handles:{
+							onhome:function(){
+								location.assign('index.html');
+							},
+							onback:function(){
+								location.assign('index.html');
+							}
+						}
+					});
+				})
+			});
+			$(function() {
+				var year = [
+						{text:'1990年',value:1990},
+						{text:'1991年',value:1991},
+						{text:'1992年',value:1992},
+						{text:'1993年',value:1993},
+						{text:'1994年',value:1994},
+						{text:'1995年',value:1995},
+						{text:'1996年',value:1996},
+						{text:'1997年',value:1997},
+						{text:'1998年',value:1998},
+						{text:'1999年',value:1999},
+						{text:'2001年',value:2001},
+						{text:'2002年',value:2002},
+						{text:'2003年',value:2003},
+						{text:'2004年',value:2004},
+						{text:'2005年',value:2005},
+						{text:'2006年',value:2006},
+						{text:'2007年',value:2007},
+						{text:'2008年',value:2008},
+						{text:'2009年',value:2009},
+						{text:'2010年',value:2010},
+						{text:'2011年',value:2011},
+						{text:'2012年',value:2012},
+						{text:'2013年',value:2013},
+						{text:'2014年',value:2014},
+						{text:'2015年',value:2015},
+					];
+					var month = [
+						{text:'1月',value:1},
+						{text:'2月',value:2},
+						{text:'3月',value:3},
+						{text:'4月',value:4},
+						{text:'5月',value:5},
+						{text:'6月',value:6},
+						{text:'7月',value:7},
+						{text:'8月',value:8},
+						{text:'9月',value:9},
+						{text:'10月',value:10},
+						{text:'11月',value:11},
+						{text:'12月',value:12}
+					];
+					var day = [
+						{text:'1',value:1},
+						{text:'2',value:2},
+						{text:'3',value:3},
+						{text:'4',value:4},
+						{text:'5',value:5},
+						{text:'6',value:6},
+						{text:'7',value:7},
+						{text:'8',value:8},
+						{text:'9',value:9},
+						{text:'10',value:10},
+						{text:'11',value:11},
+						{text:'12',value:12},
+						{text:'13',value:13},
+						{text:'14',value:14},
+						{text:'15',value:15},
+						{text:'16',value:16},
+						{text:'17',value:17},
+						{text:'18',value:18},
+						{text:'19',value:19},
+						{text:'20',value:20},
+						{text:'21',value:21},
+						{text:'22',value:22},
+						{text:'23',value:23},
+						{text:'24',value:24},
+						{text:'25',value:25},
+						{text:'26',value:26},
+						{text:'27',value:27},
+						{text:'28',value:28},
+						{text:'29',value:29},
+						{text:'30',value:30},
+						{text:'31',value:31}
+					];
+					
+				require(['UISelectGroup', 'react'], function(UISelectGroup, React) {
+					var normal = new UISelectGroup({
+						children:{year:year,month:month,day:day}
+					});					
+					$('#select').click(function() {
+						normal.show();
+					});
+					
+					var change = new UISelectGroup({
+						children:{year:year,month:month,day:day}
+					});
+					change.on('change',function(items){
+						alert(JSON.stringify(items));
+						this.hide();
+					});
+					$('#select-change').click(function() {
+						change.show();
+					});
+					
+					var value = new UISelectGroup({
+						children:{year:year,month:month,day:day}
+					});			
+					value.on('change',function(items){
+						alert(JSON.stringify(items));
+					});
+					$('#select-value').click(function() {
+						value.show();
+					});
+					$('#get-value').click(function(){
+						alert(JSON.stringify(value.value()));
+						value.hide();
+					});
+					
+					var yearClone = _.extend({},year),
+						monthClone = _.extend({},month),
+						dayClone = _.extend({},day);
+					yearClone[3].selected = true;
+					monthClone[3].selected = true;
+					dayClone[3].selected = true;
+					var selected = new UISelectGroup({
+						children:{year:yearClone,month:monthClone,day:dayClone}
+					});					
+					$('#select-selected').click(function() {
+						selected.show();
+					});
+					
+					var options = new UISelectGroup({
+						//是否开启动画效果
+						fade: false,
+						//是否有半透明遮罩
+						backdrop: false,
+						//遮罩是否响应点击关闭事件
+						keybord: false,
+						//数据
+						children:{year:year,month:month,day:day}
+					});
+					options.on('change',function(items){
+						alert(JSON.stringify(items));
+						this.hide();
+					})
+					$('#select-options').click(function() {
+						options.show();
+					});
+					
+					var evt = new UISelectGroup({
+						children:{year:year,month:month,day:day}
+					});
+					evt.on('shown',function(){
+						alert('shown');
+					});
+					evt.on('hidden',function(){
+						alert('hidden');
+					});
+					$('#select-event').click(function(){
+						evt.show();
+					});
+					
+					function getDaysOfMonth(year,month,selectedDay){
+						var max = 31;
+						switch(month){
+							case 2:
+								max = year % 4 == 0 && year % 100 != 0 ? 29 : 28;
+								break;
+							case 4:
+							case 6:
+							case 9:
+							case 11:
+								max = 30;
+								break;
+						}
+						var results = [],
+							item,
+							flag = false;
+						for(var i = 1; i <= max; i++){
+							item = {
+								text:i.toString(),
+								value:i
+							};
+							if(i === selectedDay){
+								flag = true;
+								item.selected = true;
+							}
+							results.push(item);
+						}
+						if(!flag){
+							results[results.length-1].selected = true;
+						}
+						return results;
+					}
+					
+					var itemchange = new UISelectGroup({
+						children:{year:year,month:month,day:getDaysOfMonth(1993,4,30)}
+					});
+					itemchange.on('itemchange',function(item,name){
+						if(name == 'year' || name == 'month'){
+							var results = this.value(),
+								y = results['year'].value,
+								m = results['month'].value,
+								d = results['day'].value;
+							var days = getDaysOfMonth(y,m,d);
+							//局部数据刷新
+							this.refresh('day',days);
+						}
+					});
+					$('#select-itemchange').click(function(){
+						itemchange.show();
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>
