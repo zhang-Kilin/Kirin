@@ -1,0 +1,38 @@
+{
+  "name": "pack",
+  "version": "0.0.1",
+  "description": "pack web for ",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "",
+    "package"
+  ],
+  "author": "zhang_7150@163.com",
+  "license": "ISC",
+  "frameworkInclude": [
+  ],
+  "dependencies": {
+    "ajax-request": "^1.2.1",
+    "base64-img": "^1.0.3",
+    "cssdom": "^1.0.17",
+    "file-package": "^1.0.5",
+    "file-system": "^2.1.3",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.1",
+    "html-minifier": "^0.7.2",
+    "htmldom": "^0.1.18",
+    "requirejs": "^2.1.17",
+    "strip-comment": "^1.1.3",
+    "uglify-js": "^2.4.19",
+    "underscore": "^1.8.3",
+    "utils-extend": "^1.0.8",
+    "react-tools":"^0.13.3"
+  }
+}

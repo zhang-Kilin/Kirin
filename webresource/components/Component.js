@@ -3,12 +3,12 @@ define('Component', ['react-dom', 'UIBackdrop', 'ComponentBase'], function(React
 		getDefaults: function() {
 			return {
 				fade: true,
-				backdrop:true,
-				keybord:true
+				backdrop:false,
+				keybord:false
 			};
 		},
 		render:function(){
-			if(this.options.backdrop && !this.backdrop){
+			if(this.options.backdrop){
 				this.backdrop = new UIBackdrop({
 					fade:this.options.fade,
 					click:$.proxy(this.hide,this)
