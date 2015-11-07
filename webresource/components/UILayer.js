@@ -9,6 +9,12 @@ define('UILayer',['react', 'react-dom', 'jsx.UILayer','Component'],function(Reac
 				onshow:$.proxy(this._onshow,this)
 			}; 
 		},
+		getDefaults:function(){
+			return _.extend($super.getDefaults.apply(this,arguments),{
+				backdrop:true,
+				keybord:true
+			});
+		},
 		render: function() {
 			$super.render.apply(this,arguments);
 			this.Component = ReactDOM.render(React.createElement(UILayer, React.__spread({},  this._layoutOptions), this.createElement()),this.$el[0]);
