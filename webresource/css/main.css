@@ -490,3 +490,43 @@
 		-webkit-transform: scale(1.0);
 	}
 }
+/*
+ * Calendar
+*/
+.calendar{}
+.calendar.container{
+	width: 100%;
+	max-width: 100%;
+}
+.calendar-header{
+	text-align: center;
+	padding: 10px 0;
+}
+.calendar-body .btn{
+	border-radius: 0
+}
+.calendar-body span.place{
+	display: table-cell;
+	width: 1%;
+	float: none;
+	text-align: center;
+}
+.calendar-body-header{	
+	padding: 5px 0;
+}
+.calendar-body-header span.place{
+	border:1px solid #ccc;
+}
+.calendar-toolbar{
+	text-align: left;
+	width: 100%;
+	display: block;
+}
+.calendar-toolbar .tool{
+	display: inline-block;
+	width: auto;
+}
+.calendar-toolbar .dropdown-menu{
+	max-height: 324px;
+	overflow-y: auto;
+}

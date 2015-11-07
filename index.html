@@ -8,15 +8,15 @@
 		<!-- 新 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="webresource/css/main.css" />
-		<script src="libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/require.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">						
 			require.config({
 				'baseUrl':'/webresource',
 				'paths':{
-					'react':'/libs/react.min',
-					'react-dom':'/libs/react-dom.min',
-					'jquery':'/libs/jquery.min',
-					'underscore':'/libs/underscore'
+					'react':'libs/react.min',
+					'react-dom':'libs/react-dom.min',
+					'jquery':'libs/jquery.min',
+					'underscore':'libs/underscore'
 				},
 				shim: {
 					jquery: {
@@ -28,9 +28,9 @@
 				}
 			});
 		</script>
-		<script src="libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="libs/underscore.js" type="text/javascript" charset="utf-8"></script>
-		<script src="libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/backbone.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -53,6 +53,8 @@
 		</div>
 		<div id="components">
 		</div>
+		<br><br><br><br><br>
+		<div id="calendar"></div>
 		<!--<div class="modal-backdrop fade in"></div>-->
 		<script src="webresource/components.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -86,7 +88,28 @@
 							console.log('hidden.alert.component');
 						});
 						
-					})
+					});
+				});
+				require(['jsx.UICalendar','react','react-dom'],function(UICalendar,React,ReactDOM){
+					var calendar = ReactDOM.render(React.createElement(UICalendar,{
+						date:new Date(2015,10,1),
+						currentDate:new Date,
+						body:{
+							itemFormat:function(item){
+								var date = new Date(item.year,item.month-1,item.day);
+								if (date.getDay() == 0 || date.getDay() == 6) {
+									item.disabled = true;
+								};
+								return item;
+							},
+							selecte:function(date,dateStyle,item){
+								console.log(date);
+								calendar.setState({
+									currentDate:dateStyle
+								});
+							}
+						}
+					},null),$('#calendar')[0]);
 				})
 			});
 		</script>

@@ -15,7 +15,8 @@ require.config({
 		'jsx.UIToast':'components/templates/jsx.UIToast',
 		'jsx.UIList':'components/templates/jsx.UIList',
 		'jsx.UISelect':'components/templates/jsx.UISelect',
-		'jsx.UISelectGroup':'components/templates/jsx.UISelectGroup'
+		'jsx.UISelectGroup':'components/templates/jsx.UISelectGroup',
+		'jsx.UICalendar':'components/templates/jsx.UICalendar'
 	}
 });
 
