@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../dest/webresource/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/components.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="example-title">
+							<h2>Loading</h2>
+						</div>
+						<p class="example-description">
+							loading加载动画，带半透明遮罩，动画
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="loading" class="btn btn-default">show loading</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var normal = new UILoading();					
+$('#loading').click(function() {
+	normal.show("loading……");
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Duration</h2>
+						</div>
+						<p class="example-description">
+							设置延时关闭时间，“秒”为单位
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="loading-duration" class="btn btn-default">show loading</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var duration = new UILoading();					
+$('#loading-duration').click(function() {
+	duration.show(3.5);
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Callback</h2>
+						</div>
+						<p class="example-description">
+							设置loading自动关闭后的回调函数，注意 <span class="text-danger">如果有动画效果，则回调函数会在动画执行之前就被触发，如果需要监听动画完全执行完毕的事件，请参见 <a href="#event">event</a></span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="loading-duration-callback" class="btn btn-default">duration callback</button>
+								<button id="loading-callback" class="btn btn-default">callback</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var callback = new UILoading();					
+$('#loading-duration-callback').click(function() {
+	callback.show(3.5,function(){
+		alert('duration callback');
+	});
+});
+$('#loading-callback').click(function() {
+	callback.show(function(){
+		alert('callback');
+	});
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Options</h2>
+						</div>
+						<p class="example-description">
+							通过设置options参数，改变loading的显示方式
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="loading-options" class="btn btn-default">show loading</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var options = new UILoading({
+	//是否开启动画效果
+	fade: false,
+	//是否有半透明遮罩
+	backdrop: false,
+	//遮罩是否响应点击关闭事件
+	keybord: false
+});
+$('#loading-options').click(function() {
+	options.show(3.5);
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>Event</h2>
+						</div>
+						<p class="example-description">
+							监听loading的事件
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="loading-event" class="btn btn-default">show loading</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var evt = new UILoading();
+evt.on('shown',function(){
+	alert('shown');
+});
+evt.on('hidden',function(){
+	alert('hidden');
+});
+$('#loading-event').click(function(){
+	evt.show(function(){
+		alert('callback hidden');
+	})
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<script type="text/javascript">
+		$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'UILoading',
+						toolbar:'home',
+						handles:{
+							onhome:function(){
+								location.assign('index.html');
+							},
+							onback:function(){
+								location.assign('index.html');
+							}
+						}
+					});
+				})
+			});
+			$(function() {
+				require(['UILoading', 'react'], function(UILoading, React) {
+					var normal = new UILoading();
+					$('#loading').click(function() {
+						normal.show("loading……");
+					});
+					var duration = new UILoading();
+					$('#loading-duration').click(function() {
+						duration.show(3.5);
+					});
+					var callback = new UILoading();
+					$('#loading-duration-callback').click(function() {
+						callback.show(3.5, function() {
+							alert('duration callback');
+						});
+					});
+					$('#loading-callback').click(function() {
+						callback.show(function() {
+							alert('callback');
+						});
+					});
+					var options = new UILoading({
+						//是否开启动画效果
+						fade: false,
+						//是否有半透明遮罩
+						backdrop: false,
+						//遮罩是否响应点击关闭事件
+						keybord: false
+					});
+					$('#loading-options').click(function() {
+						options.show(3.5);
+					});
+					var evt = new UILoading();
+					evt.on('shown', function() {
+						alert('shown');
+					});
+					evt.on('hidden', function() {
+						alert('hidden');
+					});
+					$('#loading-event').click(function() {
+						evt.show(function() {
+							alert('callback hidden');
+						})
+					});
+				})
+			});
+		</script>
+	</body>
+
+</html>

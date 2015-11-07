@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../dest/webresource/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/components.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="example-title">
+							<h2>Select</h2>
+						</div>
+						<p class="example-description">
+							select下拉选择框，基本用法
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var country = [
+				{text:'中国',value:0},
+				{text:'韩国',value:1},
+				{text:'朝鲜',value:2},
+				{text:'蒙古',value:3},
+				{text:'俄罗斯',value:4},
+				{text:'巴基斯坦',value:5},
+				{text:'土库曼斯坦',value:6},
+				{text:'乌兹别克斯坦',value:7},
+				{text:'印度',value:8},
+				{text:'尼泊尔',value:9},
+				{text:'缅甸',value:10},
+				{text:'柬埔寨',value:11},
+				{text:'泰国',value:12},
+				{text:'越南',value:13}
+			];
+var normal = new UISelect({
+	children:country
+});					
+$('#select').click(function() {
+	normal.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>onchnage</h2>
+						</div>
+						<p class="example-description">
+							监听select的change事件，获取当前选择的item
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-change" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var change = new UISelect({
+	children:country
+});
+change.on('change',function(item){
+	alert(JSON.stringify(item));
+	this.hide();
+});
+$('#select-change').click(function() {
+	change.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>value</h2>
+						</div>
+						<p class="example-description">
+							获取select当前选中的item
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-value" class="btn btn-default">show select</button>
+								<button id="get-value" class="btn btn-default">get select value</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var value = new UISelect({
+	children:country
+});					
+$('#select-value').click(function() {
+	value.show();
+});
+$('#get-value').click(function(){
+	alert(JSON.stringify(value.value()));
+	value.hide();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+					
+					<div class="example">
+						<div class="example-title">
+							<h2>selected</h2>
+						</div>
+						<p class="example-description">
+							通过设置item的属性selected=true，指定当前选中某一个item
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-selected" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var data = _.extend({},country);
+data[3].selected = true;
+var selected = new UISelect({
+	children:data
+});					
+$('#select-selected').click(function() {
+	selected.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Options</h2>
+						</div>
+						<p class="example-description">
+							通过设置options参数，改变select的显示方式
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-options" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var options = new UISelect({
+	//是否开启动画效果
+	fade: false,
+	//是否有半透明遮罩
+	backdrop: false,
+	//遮罩是否响应点击关闭事件
+	keybord: false,
+	//数据
+	children:country
+});
+options.on('change',function(item){
+	alert(JSON.stringify(item));
+	this.hide();
+})
+$('#select-options').click(function() {
+	options.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>Event</h2>
+						</div>
+						<p class="example-description">
+							监听select的事件
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="select-event" class="btn btn-default">show select</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var evt = new UISelect({
+	children:country
+});
+evt.on('shown',function(){
+	alert('shown');
+});
+evt.on('hidden',function(){
+	alert('hidden');
+});
+$('#select-event').click(function(){
+	evt.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<script type="text/javascript">
+		$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'UISelect',
+						toolbar:'home',
+						handles:{
+							onhome:function(){
+								location.assign('index.html');
+							},
+							onback:function(){
+								location.assign('index.html');
+							}
+						}
+					});
+				})
+			});
+			$(function() {
+				var country = [
+								{text:'中国',value:0},
+								{text:'韩国',value:1},
+								{text:'朝鲜',value:2},
+								{text:'蒙古',value:3},
+								{text:'俄罗斯',value:4},
+								{text:'巴基斯坦',value:5},
+								{text:'土库曼斯坦',value:6},
+								{text:'乌兹别克斯坦',value:7},
+								{text:'印度',value:8},
+								{text:'尼泊尔',value:9},
+								{text:'缅甸',value:10},
+								{text:'柬埔寨',value:11},
+								{text:'泰国',value:12},
+								{text:'越南',value:13}
+							];
+				require(['UISelect', 'react'], function(UISelect, React) {
+					var normal = new UISelect({
+						children:country
+					});
+					$('#select').click(function() {
+						normal.show();
+					});
+					
+					var change = new UISelect({
+						children:country
+					});
+					change.on('change',function(item){
+						alert(JSON.stringify(item));
+						this.hide();
+					});
+					$('#select-change').click(function() {
+						change.show();
+					});
+					
+					var value = new UISelect({
+						children:country
+					});					
+					$('#select-value').click(function() {
+						value.show();
+					});
+					$('#get-value').click(function(){
+						alert(JSON.stringify(value.value()));
+						value.hide();
+					});
+					
+					var data = _.extend({},country);
+					data[3].selected = true;
+					var selected = new UISelect({
+						children:data
+					});					
+					$('#select-selected').click(function() {
+						selected.show();
+					});
+					
+					var options = new UISelect({
+						//是否开启动画效果
+						fade: false,
+						//是否有半透明遮罩
+						backdrop: false,
+						//遮罩是否响应点击关闭事件
+						keybord: false,
+						//数据
+						children:country
+					});
+					options.on('change',function(item){
+						alert(JSON.stringify(item));
+						this.hide();
+					})
+					$('#select-options').click(function() {
+						options.show();
+					});
+					
+					var evt = new UISelect({
+						children:country
+					});
+					evt.on('shown',function(){
+						alert('shown');
+					});
+					evt.on('hidden',function(){
+						alert('hidden');
+					});
+					$('#select-event').click(function(){
+						evt.show();
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>

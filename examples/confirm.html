@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../dest/webresource/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/components.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" class="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="example-title">
+							<h2>Confirm</h2>
+						</div>
+						<p class="example-description">
+							confirm确认框，带半透明遮罩、动画，响应keybord关闭
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="confirm" class="btn btn-default">show confirm</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var normal = new UIConfirm();					
+$('#confirm').click(function() {
+	normal.show("这是Confirm的基本用法");
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Title</h2>
+						</div>
+						<p class="example-description">
+							设置confirm的标题栏
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="confirm-title" class="btn btn-default">show confirm</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var title = new UIConfirm();					
+$('#confirm-title').click(function() {
+	title.show("这是Confirm的基本用法",'Confirm Title');
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Callback</h2>
+						</div>
+						<p class="example-description">
+							设置confirm的“确定”和“取消”的回调函数，取消函数默认为关闭confirm，注意 <span class="text-danger">如果有动画效果，则回调函数会在动画执行之前就被触发，如果需要监听动画完全执行完毕的事件，请参见 <a href="#event">event</a></span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="confirm-callback" class="btn btn-default">show confirm</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var callabck = new UIConfirm();					
+$('#confirm-callabck').click(function() {
+	callabck.show("设置回调函数",function(){
+		alert('OK')
+	},function(){
+		alert('Cancel');
+		this.hide();
+	});
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Options</h2>
+						</div>
+						<p class="example-description">
+							通过设置options参数，改变toast的显示方式
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="confirm-options" class="btn btn-default">show confirm</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var options = new UIConfirm({
+	//是否开启动画效果
+	fade: false,
+	//是否有半透明遮罩
+	backdrop: false,
+	//遮罩是否响应点击关闭事件
+	keybord: false
+});
+$('#confirm-options').click(function() {
+	options.show("使用了options参数的confirm",'Confirm Title',function(){
+		alert('OK');
+	},function(){
+		alert('Cancel');
+		this.hide();
+	});
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>Event</h2>
+						</div>
+						<p class="example-description">
+							监听confirm的事件
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="confirm-event" class="btn btn-default">show confirm</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var evt = new UIConfirm();
+evt.on('shown',function(){
+	alert('shown');
+});
+evt.on('hidden',function(){
+	alert('hidden');
+});
+$('#confirm-event').click(function(){
+	evt.show('事件监听confirm',function(){
+		alert('OK');
+	},function(){
+		alert('Cancel');
+		this.hide();
+	})
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<script type="text/javascript">
+		$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'UIConfirm',
+						toolbar:'home',
+						handles:{
+							onhome:function(){
+								location.assign('index.html');
+							},
+							onback:function(){
+								location.assign('index.html');
+							}
+						}
+					});
+				})
+			});
+			$(function() {
+				require(['UIConfirm', 'react'], function(UIConfirm, React) {
+					
+					var normal = new UIConfirm();
+					$('#confirm').click(function() {
+						normal.show("这是Confirm的基本用法");
+					});
+					var title = new UIConfirm();
+					$('#confirm-title').click(function() {
+						title.show("这是Confirm的基本用法", 'Confirm Title');
+					});
+					var callabck = new UIConfirm();
+					$('#confirm-callback').click(function() {
+						callabck.show("设置回调函数", function() {
+							alert('OK')
+						}, function() {
+							alert('Cancel');
+							this.hide();
+						});
+					});
+					var options = new UIConfirm({
+						//是否开启动画效果
+						fade: false,
+						//是否有半透明遮罩
+						backdrop: false,
+						//遮罩是否响应点击关闭事件
+						keybord: false
+					});
+					$('#confirm-options').click(function() {
+						options.show("使用了options参数的confirm", 'Confirm Title', function() {
+							alert('OK');
+						}, function() {
+							alert('Cancel');
+							this.hide();
+						});
+					});
+					var evt = new UIConfirm();
+					evt.on('shown', function() {
+						alert('shown');
+					});
+					evt.on('hidden', function() {
+						alert('hidden');
+					});
+					$('#confirm-event').click(function() {
+						evt.show('事件监听confirm', function() {
+							alert('OK');
+						}, function() {
+							alert('Cancel');
+							this.hide();
+						})
+					});
+				})
+			});
+		</script>
+	</body>
+
+</html>
