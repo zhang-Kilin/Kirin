@@ -527,6 +527,6 @@
 	width: auto;
 }
 .calendar-toolbar .dropdown-menu{
-	max-height: 324px;
+	max-height: 156px;
 	overflow-y: auto;
 }

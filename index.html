@@ -95,16 +95,24 @@
 						date:new Date(2015,10,1),
 						currentDate:new Date,
 						body:{
+							disabled:[[,'2015-11-16'],['2015-11-18',]],
 							itemFormat:function(item){
 								var date = new Date(item.year,item.month-1,item.day);
 								if (date.getDay() == 0 || date.getDay() == 6) {
 									item.disabled = true;
 								};
+								if (item.day == 15) {
+									item.text = React.createElement('span',null,
+											React.createElement('span',null,item.day),
+											React.createElement('br'),
+											React.createElement('span',null,"纪念日")
+										);
+								};
 								return item;
 							},
 							selecte:function(date,dateStyle,item){
 								console.log(date);
-								calendar.setState({
+								calendar.setProps({
 									currentDate:dateStyle
 								});
 							}
