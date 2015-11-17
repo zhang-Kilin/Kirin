@@ -4,6 +4,8 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 			return {
 				date:new Date,
 				currentDate:new Date,
+				//预留className，方便扩展
+				className:"",
 				hasHeader:true,
 				hasToolbar:true,
 				hasBody:true,
@@ -17,6 +19,10 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 				format:null
 			},
 			body:{
+				/*
+					固定显示6行日历，不足的以前后月份补充
+				*/
+				fill:true,
 				/*
 					生成日期cell的函数
 					function(item){}
@@ -47,7 +53,7 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 					@param {object} item 当前选中的item，可使用itemFormat函数向item中注入自定义参数
 					function(date,dateStyle,item){}
 				*/
-				selecte:null,
+				select:null,
 				/*
 					不可选择的日期范围，仅限定到‘日’的判断，不支持时分秒的判断
 					disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]...]
@@ -116,12 +122,13 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 		},
 		render:function(){
 			var self = this,
+				cls = "container calendar " + (this.props.className||""),
 				props = {
 					date:this.state.date,
 					currentDate:this.state.currentDate,
 					calendar:this
 				};
-			return React.createElement("div", {className: "container calendar"}, 
+			return React.createElement("div", {className: cls}, 
 						this.renderHeader(props), 
 						this.renderToolbar(props), 
 						this.renderBody(props)
@@ -191,9 +198,10 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 		},
 		getDefaultProps:function(){
 			return {
+				fill:true,
 				weeks:null,
 				renderItem:null,
-				selecte:null,
+				select:null,
 				createDates:null,
 				itemFormat:null,
 				/*
@@ -205,12 +213,46 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 		},
 		componentWillMount:function(){
 			this.initParams(this.props);
+			this._data = this.createDates(this.props.date);
 		},
-		componentWillReceiveProps:function(nextProps){
+		componentWillReceiveProps:function(nextProps,nextState){
 			this.initParams(nextProps);
 		},
-		componentDidUpdate:function(prevProps,prevState){
+		componentWillUpdate:function(nextProps,nextState){
+			var date = nextState.date,
+				prevDate = this.state.date;
+			if (date.getFullYear() != prevDate.getFullYear() || date.getMonth() != prevDate.getMonth()) {
+				this._data = this.createDates(date);
+			};
+		},
+		shouldComponentUpdate:function(nextProps, nextState){
+			var curDate = this.state.currentDate,
+				nextCurDate = nextState.currentDate,
+				date = this.state.date;
+				nextDate = nextState.date;
+				curDiff = false
+				dateDiff = false;
 
+			if (curDate != nextCurDate) {
+				if (curDate && nextCurDate) {
+					curDiff = curDate.getFullYear() != nextCurDate.getFullYear()
+							|| curDate.getMonth() != nextCurDate.getMonth()
+							|| curDate.getDate() != nextCurDate.getDate();
+				}else{
+					curDiff = true;
+				}
+			};
+
+			dateDiff = date.getFullYear() != nextDate.getFullYear() 
+					|| date.getMonth() != nextDate.getMonth();
+			if (!dateDiff) {
+				date = this.props.date;
+				nextDate = nextProps.date;
+				dateDiff = date.getFullYear() != nextDate.getFullYear() 
+					|| date.getMonth() != nextDate.getMonth();
+			};
+
+			return curDiff || dateDiff;
 		},
 		render:function(){
 			return React.createElement("div", {className: "calendar-body", onClick: this._cellClick}, 
@@ -219,13 +261,7 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 					);
 		},
 		initParams:function(props){
-			var date = this.state.date,
-				data = this.state.data;
-			if (date != props.date) {
-				data = this.createDates(props.date);
-			};
 			this.setState({
-				data:data,
 				date:props.date,
 				currentDate:props.currentDate,
 				disabled:this.initDisabledRange(props.disabled)
@@ -267,31 +303,90 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 				return this.props.createDates(date);
 			};
 
+			if (this.props.fill) {
+				return this.craeteFillDates(date);
+			}
+
+			date = new Date(date.getFullYear(),date.getMonth(),1);
 			var results = [],
 				year = date.getFullYear(),
 				month = date.getMonth() + 1,
-				date1 = new Date(year,month-1,1),
-				w = date1.getDay(),
+				w = date.getDay(),
 				max = this.getMaxDays(year,month),
 				i = w,
 				item;
-			while(i){
-				results[--i] = null;
-			}
+			while(i--){
+				results[i] = null;
+			}			
+			i = 1;
 			for(i = 1; i<= max ; i++){
 				item = {
 					year : year,
 					month : month,
 					day : i	
 				};
+				if (_.isFunction(this.props.itemFormat)) {
+					item = this.props.itemFormat(item);
+				};
 				results.push(item);
+			}
+			return results;
+		},
+		craeteFillDates:function(date){
+			date = new Date(date.getFullYear(),date.getMonth(),1);
+			var results = [],
+				year = date.getFullYear(),
+				month = date.getMonth() + 1,
+				w = date.getDay(),
+				max = this.getMaxDays(year,month),
+				i = w,
+				item,
+				rowCount,
+				prevDate,
+				start,
+				cellCount;
+			w = w == 0 ? 7 : w;
+			rowCount = 6;
+			cellCount = rowCount * 7 - w;
+			cellCount = cellCount < max ? cellCount + 7 : cellCount;
+			i = 1-w;
+			while(i <= cellCount){
+				if (i<=0) {
+					if (!prevDate) {
+						prevDate = new Date(date.setDate(-w));
+						prevDate = {
+							year:prevDate.getFullYear(),
+							month:prevDate.getMonth() + 1,
+							day:prevDate.getDate()
+						};
+					};
+					prevDate.day++;
+					item = _.extend({},prevDate);
+				}else if (i > max){
+					item = {
+						year : month == 12 ? year + 1 : year,
+						month : month == 12 ? 1 : month + 1,
+						day : i - max
+					};
+				}else{
+					item = {
+						year : year,
+						month : month,
+						day : i	
+					};
+				}
+				if (_.isFunction(this.props.itemFormat)) {
+					item = this.props.itemFormat(item);
+				};
+				results.push(item);
+				i++;
 			}
 			return results;
 		},
 		getMaxDays:function(year,month){
 			switch(month){
 				case 2:
-					return year % 100 != 0 && year % 4 == 0 ? 29 : 28;
+					return year % 100 != 0 && year % 4 == 0 || year % 400 == 0 ? 29 : 28;
 				case 4:
 				case 6:
 				case 9:
@@ -314,69 +409,80 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 		},
 		createItems:function(){
 			var results = [],
+				data = this._data,
 				cells,
 				item,
 				j,
 				i = 0;
-			while(i < this.state.data.length){
+			while(i < data.length){
 				cells = [];
 				for (j = i + 7; i < j ; i++) {
-					item = this.state.data[i];
+					item = data[i];
 					if (item) {
 						item = this.formatRangeDisabled(item);
-						if (_.isFunction(this.props.itemFormat)) {
-							item = this.props.itemFormat(item);
-						};
 					}
 					cells.push(this.oncreateitem(item));
 				};
 				results.push(React.createElement("div", {className: "btn-group-justified"}, cells));
 			}
+
 			return results;
 		},
 		_cellClick:function(e){
-			var date = $(e.target).attr("data-date"),
+			var target = e.target,
+				date,
 				dateStyle,
 				item;
-			if(date && !$(e.target).attr('disabled')){
+			while (target && !(date = $(target).attr("data-date"))) {
+				target = target.parentNode;
+			};
+			if(date && !$(target).attr('disabled')){
 				dateStyle = new Date(date.replace(/\-/g,'/'));
-				item = _.find(this.props.data,$.proxy(function(o){
+				item = _.find(this._data,$.proxy(function(o){
 					return this.diff(o,dateStyle);
 				},this));
 
-				this.onselecte(date,dateStyle,item);
+				this.onselect.call(this,date,dateStyle,item);
 			}
 		},
 		/*
 			item = {year:2015,month:11,day:7}
 		*/
 		oncreateitem:function(item){
-			if(_.isFunction(this.props.renderItem)){
-				return this.props.renderItem.apply(this,arguments);
-			}
 			if (item) {
 				var cls = this.diff(item,this.state.currentDate) && !item.disabled ? "btn btn-info active" : "btn btn-default",
 					date = item.year + "-" + item.month + "-" + item.day,
 					props = {
 						"data-date":date,
-						"className":cls,
+						"className":cls + (item.month != this.state.date.getMonth() + 1 ? " gray" : ""),
 						"href":"javascript:;"
-					};
+					},
+					text = item.text || item.day;					
+					if(_.isFunction(this.props.renderItem)){
+						text = this.props.renderItem.apply(this.props.calendar,arguments);
+					}
 					if(item.disabled){
 						props.disabled="disabled";
 					}
-				return React.createElement("a", React.__spread({},  props), item.text || item.day);
+				return React.createElement("a", React.__spread({},  props), text);
 			}else{
 				return React.createElement("span", {className: "place"});
 			}
 		},
-		onselecte:function(date,dateStyle,item){
-			if(_.isFunction(this.props.selecte)){
-				return this.props.selecte.apply(this,arguments);
-			}
-			this.props.calendar.setState({
-				currentDate:dateStyle
-			});
+		onselect:function(date,dateStyle,item){
+			// this.props.calendar.setState({
+			// 	date:dateStyle
+			// });
+			// var args = arguments;
+			// setTimeout($.proxy(function(){
+				if(_.isFunction(this.props.select)){
+					return this.props.select.apply(this.props.calendar,arguments);
+				}
+				this.props.calendar.setState({
+					date:dateStyle,
+					currentDate:dateStyle
+				});
+			// },this),0);
 		},
 		diff:function(item1,item2){			
 			function format(date){
@@ -396,18 +502,19 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 		formatRangeDisabled:function(item){
 			var range = this.state.disabled,
 				dis,
-				result,
 				date = new Date(item.year,item.month - 1,item.day);
 			if (range) {
 				dis = _.find(range,function(r){
-					result = false;
-					if (r[0]) {
-						result = date >= r[0];
+					if (r[0] && !r[1]) { //右开口，无上限
+						return date >= r[0];
 					};
-					if (r[1]) {
-						result |= (date <= r[1]);
+					if (r[0] && r[1]) { //两端都闭口，取范围
+						return date >= r[0] && date <= r[1];
 					};
-					return !!result;
+					if (!r[0] && r[1]) { //左开口，无下限
+						return date <= r[1];
+					};
+					return false;
 				});
 				if (dis) {
 					item.disabled = true;
@@ -449,7 +556,7 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 			return {
 				years:[1900,2050],
 				currentDate:new Date,
-				selecte:function(item){},
+				select:function(item){},
 				format:function(type,item){
 					// return type == "y" ? item + " 年" : item + " 月";
 					return item;
@@ -564,7 +671,7 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 					});
 					break;
 				case "prevMonth":
-					disabled = (this.state.year <= this.props.years[0] && this.state.month == 1) ? "disabled" : "";
+					disabled = (this.state.year < this.props.years[0] || (this.state.year == this.props.years[0] && this.state.month == 1)) ? "disabled" : "";
 					_.extend(props,{
 						onClick:disabled ? null : this.prevMonth,
 						disabled:disabled
@@ -578,7 +685,7 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 					});
 					break;
 				case "nextMonth":
-					disabled = (this.state.year >= this.props.years[1] && this.state.month == 12) ? "disabled" : "";
+					disabled = (this.state.year > this.props.years[1] || (this.state.year == this.props.years[1] && this.state.month == 12)) ? "disabled" : "";
 					_.extend(props,{
 						onClick:disabled ? null : this.nextMonth,
 						disabled:disabled
@@ -607,10 +714,10 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 				props = {
 					"className": i == this.state.year ? "active" : "",
 					"data-year":i,
-					"onClick":this.selecte
+					"onClick":this.select
 				};
 				results.push(React.createElement("li", React.__spread({},  props), 
-								React.createElement("a", {href: "javascript:;"}, i)
+								React.createElement("a", {href: "javascript:;"}, this.format('y',i))
 							));
 			}
 			return results;
@@ -646,11 +753,11 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 		},
 		format:function(type,item){
 			if (_.isFunction(this.props.format)) {
-				return this.props.format.apply(this,arguments);
+				return this.props.format.apply(this.props.calendar,arguments);
 			};
 			return item;
 		},
-		selecte:function(e){
+		select:function(e){
 			var month = parseInt($(e.currentTarget).attr("data-month")),
 				year = parseInt($(e.currentTarget).attr("data-year"));
 			month = month || this.state.month;
@@ -662,10 +769,6 @@ define('jsx.UICalendar',['react','react-dom'],function(React,ReactDOM){
 			});
 		},
 		_select:function(item){
-			// this.setState(item);
-			// if (_.isFunction(this.props.selecte)) {
-			// 	this.props.selecte.call(this,item);
-			// };
 			var date = new Date(this.state.date);
 			date.setFullYear(item.year);
 			date.setMonth(item.month-1);

@@ -12,6 +12,12 @@ define('UILayerList',['react', 'react-dom', 'jsx.UILayerList','Component'],funct
 			};
 			$super.initialize.apply(this,arguments);
 		},
+		getDefaults:function(){
+			return _.extend($super.getDefaults.apply(this,arguments),{
+				backdrop:true,
+				keybord:true
+			});
+		},
 		render: function() {
 			$super.render.apply(this,arguments);
 			this.Component = ReactDOM.render(<UILayerList {...this._layoutOptions}>{this.createElement()}</UILayerList>,this.$el[0]);

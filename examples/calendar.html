@@ -7,7 +7,7 @@
 		<title id="title"></title>
 		<!-- 新 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../webresource/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../dest/webresource/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="example.css" />
 		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
 		<script src="../dest/webresource/components.js" type="text/javascript" charset="utf-8" exclude="1"></script>
@@ -15,33 +15,313 @@
 
 	<body>
 		<div class="main">
-			<div id="header" class="header">
+			<div id="header">
 			</div>
 			<div id="viewport" class="viewport">
 				<div class="view">
-					<br><br><br>
-					<div class="container calendar">
-						<div class="calendar-body">
-							<div class="btn-group-justified">
-								<a href="javascript:;" class="btn btn-default">1</a>
-								<a href="javascript:;" class="btn btn-default">2</a>
-								<a href="javascript:;" class="btn btn-default">3</a>
-								<a href="javascript:;" class="btn btn-default">4</a>
-								<a href="javascript:;" class="btn btn-info active">5</a>
-								<a href="javascript:;" class="btn btn-default">6</a>
-								<a href="javascript:;" class="btn btn-default">7</a>
+					<div class="example">
+						<div class="example-title">
+							<h2>jsx.UICalendar</h2>
+						</div>
+						<p class="example-description">
+							jsx.UICalendar原生react组件，为了便于扩展，未做Backbone.View的包装
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="calendar1"></div>
 							</div>
-							<div class="btn-group-justified">
-								<a href="javascript:;" class="btn btn-default">8</a>
-								<a href="javascript:;" class="btn btn-default">9</a>
-								<a href="javascript:;" class="btn btn-default">10</a>
-								<a href="javascript:;" class="btn btn-default">11</a>
-								<a href="javascript:;" class="btn btn-default">12</a>
-								<a href="javascript:;" class="btn btn-default">13</a>
-								<a href="javascript:;" class="btn btn-default">14</a>
+							<div class="example-code">
+								<pre>
+require(['jsx.UICalendar','react','react-dom'],function(UICalendar,React,ReactDOM){
+	var calendar = ReactDOM.render(React.createElement(UICalendar,{
+		//当前要渲染的月份
+		date:new Date(),
+		//当前选中的日期，如果不需要默认选中日期，则currentDate=null即可
+		currentDate:new Date
+	},null),$('#calendar')[0]);
+});
+								</pre>
 							</div>
 						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
 					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Header</h2>
+						</div>
+						<p class="example-description">
+							设置Calendar的标题栏
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="calendar2"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var calendar2 = ReactDOM.render(React.createElement(UICalendar,{
+	//当前要渲染的月份
+	date:new Date(),
+	//当前选中的日期
+	currentDate:new Date,
+	//是否包含Header，默认true
+	hasHeader:true,
+	//Header部分配置，仅当hasHeader=true时生效
+	header:{
+		//格式化header文本
+		//@param {Date} date 当前渲染的时间
+		//@return {string} 返回要渲染的字符串
+		format:function(date){
+			var year = date.getFullYear(),
+				month = date.getMonth() + 1;
+			return year +" 年 "+ month + " 月 ";
+		}
+	},
+},null),$('#calendar2')[0]);
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Toolbar</h2>
+						</div>
+						<p class="example-description">
+							设置Calendar的工具栏
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="calendar3"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var calendar3 = ReactDOM.render(React.createElement(UICalendar,{
+	//当前要渲染的月份
+	date:new Date(),
+	//当前选中的日期
+	currentDate:new Date,
+	//是否包含toolbar工具栏，默认为true
+	hasToolbar:true,
+	//工具条配置，仅当hasToolbar=true时，该配置生效
+	toolbar:{
+		//格式化渲染item,
+		//@param {string} type 当前渲染的类型
+		//		'y' : 年份
+		//		'M': 月份
+		format:function(type,item){
+			return item + (type == 'y' ? ' 年' : ' 月');
+		},
+		//当前日历要渲染的起止年份，默认[1900,2500]
+		//如果years=null，则工具条上不包含年份和月份的快捷切换工具
+		years:[1900,2050],
+		//是否包含【返回今日】按钮
+		hasToday:true,
+		//【返回今日】按钮的文本
+		todayText:"返回今日"
+	}
+},null),$('#calendar3')[0]);
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>select</h2>
+						</div>
+						<p class="example-description">
+							日期被选中的回调函数
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="calendar4"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var calendar4 = ReactDOM.render(React.createElement(UICalendar,{
+	//当前要渲染的月份
+	date:new Date(),
+	//当前选中的日期
+	currentDate:new Date,
+	//是否包含日历的body部分，默认为true
+	//@warning:不建议更改此参数的值，如果没有了body，日历也就失效了
+	hasBody:true,
+	//日历主体部分配置项，仅当hasBody=true时生效
+	body:{
+		/*
+			当日期被选中后的回调函数
+			@param {string} date 日期字符串表示'2015-11-9'
+			@param {Date} dateStyle Date格式的日期表示
+			@param {object} item 当前选中的item，可使用itemFormat函数向item中注入自定义参数
+			function(date,dateStyle,item){}
+		*/
+		select:function(date,dateStyle,item){
+			//选中当前日期
+			this.setState({
+				//设置当前选中的日期
+				currentDate:dateStyle
+			});
+		}
+	}
+},null),$('#calendar4')[0]);
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div id="event" class="example">
+						<div class="example-title">
+							<h2>范围日期禁用</h2>
+						</div>
+						<p class="example-description">
+							禁用指定范围内的所有日期，<span class="text-danger">disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]...]</span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="calendar6"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var calendar6 = ReactDOM.render(React.createElement(UICalendar,{
+	//当前要渲染的月份
+	date:new Date(),
+	//当前选中的日期
+	currentDate:new Date,
+	//日历主体部分配置项，仅当hasBody=true时生效
+	body:{
+		/*
+			不可选择的日期范围，仅限定到‘日’的判断，不支持时分秒的判断
+			disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]...]
+		*/
+		disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]]
+	}
+},null),$('#calendar6')[0]);
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>高级应用（设置表头、单元格格式化等操作）</h2>
+						</div>
+						<p class="example-description">
+							通过监听 body.itemFormat,body.renderItem 实现高级应用，参见【农历日历】 <a href="lunar.html">jsx.UILunarCalendar</a>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="calendar5"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var calendar5 = ReactDOM.render(React.createElement(UICalendar,{
+	//当前要渲染的月份
+	date:new Date(),
+	//当前选中的日期
+	currentDate:new Date,
+	//日历主体部分配置项，仅当hasBody=true时生效
+	body:{
+		/*
+			表头，周表示，必须以周日开始，顺序依次到周六
+			如果weeks == null,则不显示表头
+		*/
+		weeks:[
+			{
+				text:'Sun',
+				value:0,
+				className:'text-danger'
+			},{
+				text:'Mon',
+				value:1
+			},{
+				text:'Tue',
+				value:2
+			}
+			,{
+				text:'Wed',
+				value:3
+			}
+			,{
+				text:'Thu',
+				value:4
+			}
+			,{
+				text:'Fri',
+				value:5
+			}
+			,{
+				text:'Sat',
+				value:6,
+				className:'text-danger'
+			}
+		],
+		//true:固定显示6行日历，不足的以前后月份补充
+		//false:仅显示指定月份的日历
+		fill:false,
+		//渲染之前的数据结构格式化，可以绑定自定义属性到item上
+		//item = {year:2015,month:11,day:16}
+		itemFormat:function(item){
+			//设置item.disabled = true，以实现单个日期禁用
+			//@example 下面的代码实现了禁用周末
+			var date = new Date(item.year,item.month-1,item.day);
+			if(date.getDay() == 0 || date.getDay() == 6){
+				item.disabled = true;
+			}
+
+			//@warning：一定要return item
+			return item;
+		},
+		renderItem:function(item){
+			var now = new Date,
+				yesterday = new Date(new Date(now).setDate(now.getDate()-1)),
+				tomorrow = new Date(new Date(now).setDate(now.getDate()+1));
+			if(item.year == yesterday.getFullYear() && item.month == yesterday.getMonth()+1 && item.day == yesterday.getDate()){
+				return React.createElement('span',null,
+						React.createElement('span',null,item.day),
+						React.createElement('br'),
+						React.createElement('small',{className:'text-danger'},'昨天')
+					);
+			}else if(item.year == now.getFullYear() && item.month == now.getMonth()+1 && item.day == now.getDate()){
+				return React.createElement('span',null,
+						React.createElement('span',null,item.day),
+						React.createElement('br'),
+						React.createElement('small',{className:'text-success'},'今天')
+					);
+			}else if(item.year == tomorrow.getFullYear() && item.month == tomorrow.getMonth()+1 && item.day == tomorrow.getDate()){
+				return React.createElement('span',null,
+						React.createElement('span',null,item.day),
+						React.createElement('br'),
+						React.createElement('small',{className:'text-danger'},'明天')
+					);
+			}
+
+			return item.text || item.day;
+		}
+	}
+},null),$('#calendar5')[0]);
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
 				</div>
 			</div>
 			<div id="footer" class="footer">
@@ -56,14 +336,199 @@
 			$(function(){
 				require(['UIHeader'],function(UIHeader){
 					new UIHeader({
-						title:'Component Example',
+						title:'Component UICalendar',
 						handles:{
 							onback:function(){
-//								location.assign('index.html');
+								location.assign('index.html');
 							}
 						}
 					});
 				})
+			});
+			$(function(){
+				require(['jsx.UICalendar','react','react-dom'],function(UICalendar,React,ReactDOM){
+					var calendar1 = ReactDOM.render(React.createElement(UICalendar,{
+						//当前要渲染的月份
+						date:new Date(),
+						//当前选中的日期
+						currentDate:new Date
+					},null),$('#calendar1')[0]);
+
+
+					var calendar2 = ReactDOM.render(React.createElement(UICalendar,{
+						//当前要渲染的月份
+						date:new Date(),
+						//当前选中的日期
+						currentDate:new Date,
+						//是否包含Header，默认true
+						hasHeader:true,
+						//Header部分配置，仅当hasHeader=true时生效
+						header:{
+							//格式化header文本
+							//@param {Date} date 当前渲染的时间
+							//@return {string} 返回要渲染的字符串
+							format:function(date){
+								var year = date.getFullYear(),
+									month = date.getMonth() + 1;
+								return year +" 年 "+ month + " 月 ";
+							}
+						},
+					},null),$('#calendar2')[0]);
+
+					var calendar3 = ReactDOM.render(React.createElement(UICalendar,{
+						//当前要渲染的月份
+						date:new Date(),
+						//当前选中的日期
+						currentDate:new Date,
+						//是否包含toolbar工具栏，默认为true
+						hasToolbar:true,
+						//工具条配置，仅当hasToolbar=true时，该配置生效
+						toolbar:{
+							//格式化渲染item,
+							//@param {string} type 当前渲染的类型
+							//		'y' : 年份
+							//		'M': 月份
+							//@param {string} item 当前要渲染的值
+							format:function(type,item){
+								return item + (type == 'y' ? ' 年' : ' 月');
+							},
+							//当前日历要渲染的起止年份，默认[1900,2500]
+							//如果years=null，则工具条上不包含年份和月份的快捷切换工具
+							years:[1900,2050],
+							//是否包含【返回今日】按钮，默认为true
+							hasToday:true,
+							//【返回今日】按钮的文本，默认文本“返回今日”
+							todayText:"返回今日"
+						}
+					},null),$('#calendar3')[0]);
+
+					var calendar4 = ReactDOM.render(React.createElement(UICalendar,{
+						//当前要渲染的月份
+						date:new Date(),
+						//当前选中的日期
+						currentDate:new Date,
+						//是否包含日历的body部分，默认为true
+						//@warning:不建议更改此参数的值，如果没有了body，日历也就失效了
+						hasBody:true,
+						//日历主体部分配置项，仅当hasBody=true时生效
+						body:{
+							/*
+								当日期被选中后的回调函数
+								@param {string} date 日期字符串表示'2015-11-9'
+								@param {Date} dateStyle Date格式的日期表示
+								@param {object} item 当前选中的item，可使用itemFormat函数向item中注入自定义参数
+								function(date,dateStyle,item){}
+							*/
+							select:function(date,dateStyle,item){
+								//选中当前日期
+								this.setState({
+									//设置当前选中的日期
+									currentDate:dateStyle
+								});
+							}
+						}
+					},null),$('#calendar4')[0]);
+
+					var calendar5 = ReactDOM.render(React.createElement(UICalendar,{
+						//当前要渲染的月份
+						date:new Date(),
+						//当前选中的日期
+						currentDate:new Date,
+						//日历主体部分配置项，仅当hasBody=true时生效
+						body:{
+							/*
+								表头，周表示，必须以周日开始，顺序依次到周六
+							*/
+							weeks:[
+								{
+									text:'Sun',
+									value:0,
+									className:'text-danger'
+								},{
+									text:'Mon',
+									value:1
+								},{
+									text:'Tue',
+									value:2
+								}
+								,{
+									text:'Wed',
+									value:3
+								}
+								,{
+									text:'Thu',
+									value:4
+								}
+								,{
+									text:'Fri',
+									value:5
+								}
+								,{
+									text:'Sat',
+									value:6,
+									className:'text-danger'
+								}
+							],
+							//true:固定显示6行日历，不足的以前后月份补充
+							//false:仅显示指定月份的日历
+							fill:false,
+							//渲染之前的数据结构格式化，可以绑定自定义属性到item上
+							//item = {year:2015,month:11,day:16}
+							itemFormat:function(item){
+								//设置item.disabled = true，以实现单个日期禁用
+								//@example 下面的代码实现了禁用周末
+								var date = new Date(item.year,item.month-1,item.day);
+								if(date.getDay() == 0 || date.getDay() == 6){
+									item.disabled = true;
+								}
+
+								//@warning：一定要return item
+								return item;
+							},
+							renderItem:function(item){
+								var now = new Date,
+									yesterday = new Date(new Date(now).setDate(now.getDate()-1)),
+									tomorrow = new Date(new Date(now).setDate(now.getDate()+1));
+								if(item.year == yesterday.getFullYear() && item.month == yesterday.getMonth()+1 && item.day == yesterday.getDate()){
+									return React.createElement('span',null,
+											React.createElement('span',null,item.day),
+											React.createElement('br'),
+											React.createElement('small',{className:'text-danger'},'昨天')
+										);
+								}else if(item.year == now.getFullYear() && item.month == now.getMonth()+1 && item.day == now.getDate()){
+									return React.createElement('span',null,
+											React.createElement('span',null,item.day),
+											React.createElement('br'),
+											React.createElement('small',{className:'text-success'},'今天')
+										);
+								}else if(item.year == tomorrow.getFullYear() && item.month == tomorrow.getMonth()+1 && item.day == tomorrow.getDate()){
+									return React.createElement('span',null,
+											React.createElement('span',null,item.day),
+											React.createElement('br'),
+											React.createElement('small',{className:'text-danger'},'明天')
+										);
+								}
+								
+								return item.text || item.day;
+							}
+						}
+					},null),$('#calendar5')[0]);
+
+					var calendar6 = ReactDOM.render(React.createElement(UICalendar,{
+						//当前要渲染的月份
+						date:new Date(),
+						//当前选中的日期
+						currentDate:new Date,
+						//日历主体部分配置项，仅当hasBody=true时生效
+						body:{
+							/*
+								不可选择的日期范围，仅限定到‘日’的判断，不支持时分秒的判断
+								disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]...]
+							*/
+							disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]]
+						}
+					},null),$('#calendar6')[0]);
+				});
 			});
 		</script>
 	</body>

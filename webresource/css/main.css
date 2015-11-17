@@ -100,19 +100,22 @@
 /*
  * Header
  */
+#header{	
+	height: 44px;
+}
+#header>.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+}
 
 .header {
 	height: 44px;
 	display: block;
 	background: #5bc0de;
 	color: #fff;
-}
-.header header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 10;
-	width: 100%;
 }
 .header header h3 {
 	height: 44px;
@@ -503,7 +506,14 @@
 	padding: 10px 0;
 }
 .calendar-body .btn{
-	border-radius: 0
+	border-radius: 0;
+	font-weight:600;
+}
+.calendar-body .btn[disabled]{
+	color: #ccc;
+}
+.calendar-body .btn.gray{
+	color: #ccc
 }
 .calendar-body span.place{
 	display: table-cell;
@@ -511,7 +521,23 @@
 	float: none;
 	text-align: center;
 }
-.calendar-body-header{	
+.calendar-body .btn-group-justified>.btn{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;	
+}
+/*.calendar-body .btn-group-justified .btn{
+	border-left-width:0;
+	border-right-width:0;
+}
+.calendar-body .btn-group-justified>a.btn:first-child{
+	border-left-width:1px;
+}
+.calendar-body .btn-group-justified>a.btn:last-child{
+	border-right-width:1px;
+}*/
+
+.calendar-body-header{
 	padding: 5px 0;
 }
 .calendar-body-header span.place{
@@ -530,3 +556,36 @@
 	max-height: 156px;
 	overflow-y: auto;
 }
+
+/*
+ * HolidayCalendar
+*/
+.calendar-holiday .calendar-body .btn-group-justified:not(.calendar-body-header){
+	min-height: 54px;
+}
+
+.calendar-holiday .calendar-body .btn small{
+	font-weight: 100;
+}
+.calendar-holiday .calendar-body .btn[disabled] small{
+	color: #ccc;
+}
+.calendar-holiday .calendar-body .btn.active small{
+	color: #fff;
+}
+.calendar-holiday .calendar-body .btn.gray .text-danger{
+	color: #ccc
+}
+/*
+ *	Tree
+*/
+.tree{width: auto;}
+.tree ul{list-style: none;padding: 0;margin: 0;margin-left: 20px}
+.tree>ul{margin-left: 0}
+.tree .limb>a>span{display: inline-block;padding: 3px 5px}
+.tree .limb>a>span:active,
+.tree .limb>a>i:active{background: #337ab7;color: #fff}
+.tree a:focus,
+.tree a:active,
+.tree a:hover{text-decoration: none;}
+.tree .leaf>a:active{background: #337ab7;color: #fff}

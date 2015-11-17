@@ -50,11 +50,13 @@ define('jsx.UIHeader', ['react','jsx.UIToolbars'], function(React,UIToolbars) {
 		render:function(){
 			var cls = this.state.show ? '' : 'hide';
 			cls = 'header '+cls;
-			return React.createElement("header", {className: cls}, 
-						this.createBack(), 
-						this.createToolbarContainer(), 
-						this.createTitleContainer(), 
-						React.createElement("div", {className: "clearfix"})
+			return React.createElement("div", {className: cls}, 
+						 React.createElement("header", null, 
+							this.createBack(), 
+							this.createToolbarContainer(), 
+							this.createTitleContainer(), 
+							React.createElement("div", {className: "clearfix"})
+						)
 					);
 		},
 		isReactElement:function(obj){

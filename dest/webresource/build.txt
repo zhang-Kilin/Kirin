@@ -17,6 +17,9 @@ components/templates/jsx.UIToast.js
 components/templates/jsx.UIList.js
 components/templates/jsx.UISelect.js
 components/templates/jsx.UISelectGroup.js
+components/templates/jsx.UICalendar.js
+components/templates/jsx.UILunarCalendar.js
+components/templates/jsx.UITree.js
 components/ComponentBase.js
 components/UIBackdrop.js
 components/Component.js
@@ -37,5 +40,6 @@ libs/require.js
 libs/underscore.js
 libs/jquery.min.js
 libs/backbone.js
+libs/date-util.js
 libs/react.min.js
 libs/react-dom.min.js

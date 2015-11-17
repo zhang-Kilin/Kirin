@@ -227,7 +227,7 @@ define('jsx.UIToolbars', ['react'], function(React) {
 					return _.indexOf(item.alias,icon) >= 0;
 				});
 				if(!obj){
-					return;
+					return React.createElement(createClass(options));
 				}
 				options.icon = obj.icon;
 			}

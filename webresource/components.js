@@ -16,7 +16,9 @@ require.config({
 		'jsx.UIList':'components/templates/jsx.UIList',
 		'jsx.UISelect':'components/templates/jsx.UISelect',
 		'jsx.UISelectGroup':'components/templates/jsx.UISelectGroup',
-		'jsx.UICalendar':'components/templates/jsx.UICalendar'
+		'jsx.UICalendar':'components/templates/jsx.UICalendar',
+		'jsx.UILunarCalendar':'components/templates/jsx.UILunarCalendar',
+		'jsx.UITree':'components/templates/jsx.UITree'
 	}
 });
 

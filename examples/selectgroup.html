@@ -16,7 +16,7 @@
 
 	<body>
 		<div class="main">
-			<div id="header" class="header">
+			<div id="header">
 			</div>
 			<div id="viewport" class="viewport">
 				<div class="view">
@@ -108,7 +108,7 @@ var day = [
 	{text:'31',value:31}
 ];
 var normal = new UISelectGroup({
-	children:[year,month,day]
+	children:{year:year,month:month,day:day}
 });					
 $('#select').click(function() {
 	normal.show();
@@ -135,7 +135,7 @@ $('#select').click(function() {
 							<div class="example-code">
 								<pre>
 var change = new UISelectGroup({
-	children:[year,month,day]
+	children:{year:year,month:month,day:day}
 });
 change.on('change',function(items){
 	//the parameter of 'items',it like this 
@@ -171,7 +171,7 @@ $('#select-change').click(function() {
 							<div class="example-code">
 								<pre>
 var value = new UISelectGroup({
-	children:[year,month,day]
+	children:{year:year,month:month,day:day}
 });					
 value.on('change',function(items){
 	alert(JSON.stringify(items));
@@ -211,7 +211,7 @@ yearClone[3].selected = true;
 monthClone[3].selected = true;
 dayClone[3].selected = true;
 var selected = new UISelectGroup({
-	children:[yearClone,monthClone,dayClone]
+	children:{year:yearClone,month:monthClone,day:dayClone}
 });					
 $('#select-selected').click(function() {
 	selected.show();
@@ -245,7 +245,7 @@ var options = new UISelectGroup({
 	//遮罩是否响应点击关闭事件
 	keybord: false,
 	//数据
-	children:[year,month,day]
+	children:{year:year,month:month,day:day}
 });
 options.on('change',function(items){
 	alert(JSON.stringify(items));
@@ -276,7 +276,7 @@ $('#select-options').click(function() {
 							<div class="example-code">
 								<pre>
 var evt = new UISelectGroup({
-	children:[year,month,day]
+	children:{year:year,month:month,day:day}
 });
 evt.on('shown',function(){
 	alert('shown');
@@ -475,7 +475,7 @@ $('#select-itemchange').click(function(){
 					});
 					
 					var change = new UISelectGroup({
-						children:{year:year,month:month,day:day}
+						children:$.extend(true,{},{year:year,month:month,day:day})
 					});
 					change.on('change',function(items){
 						alert(JSON.stringify(items));
@@ -486,7 +486,7 @@ $('#select-itemchange').click(function(){
 					});
 					
 					var value = new UISelectGroup({
-						children:{year:year,month:month,day:day}
+						children:$.extend(true,{},{year:year,month:month,day:day})
 					});			
 					value.on('change',function(items){
 						alert(JSON.stringify(items));
@@ -499,9 +499,9 @@ $('#select-itemchange').click(function(){
 						value.hide();
 					});
 					
-					var yearClone = _.extend({},year),
-						monthClone = _.extend({},month),
-						dayClone = _.extend({},day);
+					var yearClone = $.extend(true,{},year),
+						monthClone = $.extend(true,{},month),
+						dayClone = $.extend(true,{},day);
 					yearClone[3].selected = true;
 					monthClone[3].selected = true;
 					dayClone[3].selected = true;
@@ -520,7 +520,7 @@ $('#select-itemchange').click(function(){
 						//遮罩是否响应点击关闭事件
 						keybord: false,
 						//数据
-						children:{year:year,month:month,day:day}
+						children:$.extend(true,{},{year:year,month:month,day:day})
 					});
 					options.on('change',function(items){
 						alert(JSON.stringify(items));
@@ -577,7 +577,7 @@ $('#select-itemchange').click(function(){
 					}
 					
 					var itemchange = new UISelectGroup({
-						children:{year:year,month:month,day:getDaysOfMonth(1993,4,30)}
+						children:$.extend(true,{},{year:year,month:month,day:getDaysOfMonth(1993,4,30)})
 					});
 					itemchange.on('itemchange',function(item,name){
 						if(name == 'year' || name == 'month'){

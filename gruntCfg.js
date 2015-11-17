@@ -22,7 +22,8 @@ module.exports = {
 		'jquery':'libs/jquery.min',
 		'backbone':'libs/backbone',
 		'react':'libs/react.min',
-		'react-dom':'libs/react-dom.min'
+		'react-dom':'libs/react-dom.min',
+		'date-util':'libs/date-util'
 	},
 	// //首页地址
 	// 'index':'examples/test.html',
@@ -40,6 +41,7 @@ module.exports = {
 				'libs/underscore',
 				'libs/jquery.min',
 				'libs/backbone',
+				'libs/date-util',
 				'react',
 				'react-dom'
 			]

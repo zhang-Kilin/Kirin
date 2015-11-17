@@ -22,11 +22,11 @@ define('UIHeader', ['react', 'react-dom', 'ComponentBase', 'jsx.UIHeader'], func
 				toolbar:toolbar || this.options.toolbar || [],
 				handles:_.extend({}, this.options.handles, handles)
 			};
-			$.extend(this.options,{
+			$.extend(true,this.options,{
 				title:title,
 				toolbar:toolbar,
 				handles:handles
-			},true);
+			});
 			this.render();
 			this.Component.show();
 			this.trigger('shown');

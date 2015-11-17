@@ -148,6 +148,9 @@ define('jsx.UISelect',['react'],function(React){
 			e.stopPropagation();
 			e.preventDefault();
 			return false;
+		},
+		value:function(){
+			return this.props.children[this.state.selectedIndex];
 		}
 	});
 	
