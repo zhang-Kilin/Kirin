@@ -51,6 +51,9 @@
 			<a id="select" href="javascript:;" class="btn btn-default">Select</a>
 			<a id="select-group" href="javascript:;" class="btn btn-default">SelectGroup</a>
 			
+<a id="store" href="javascript:;" class="btn btn-default">Store</a>
+<a id="store1" href="javascript:;" class="btn btn-default">Store1</a>
+
 		</div>
 		<div id="components">
 		</div>
@@ -112,6 +115,54 @@
 		<script src="webresource/components.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(function(){
+				require(['LocalStorageBase'],function(StoreBase){
+					var Store = StoreBase.extend({
+						key:'TEST'
+					}),
+						Store1 = StoreBase.extend({
+							key:'TEST1'
+						});
+
+					var status = '',
+						status1 = '',
+						store = Store.instance(),
+						store1 = Store1.instance();
+
+					$('#store').click(function(){
+						store = Store.instance();
+						if (status == '') {
+							status = '1';
+							store.set({
+								key:'hello world'
+							});
+						}else if (status == '1') {
+							status = '2';
+							console.log(store.get());
+						}else if (status == '2') {
+							status = '';
+							store.remove();
+						};
+					});
+
+					$('#store1').click(function(){
+						if (status1 == '') {
+							status1 = '1';
+							store1.set({
+								key:'my name is store1'
+							});
+						}else if (status1 == '1') {
+							status1 = '2';
+							console.log(store1.get());
+						}else if (status1 == '2') {
+							status1 = '';
+							store1.remove();
+						};
+					});
+				});
+			})
+		</script>
+		<script type="text/javascript">
+			$(function(){
 				require(['UIHeader'],function(UIHeader){
 					new UIHeader({
 						title:'Index',
@@ -129,7 +180,7 @@
 						]
 					});
 				})
-			})
+			});
 			var now = new Date;
 			var s = dateUtil.getLunarDate(now);
 			console.log(s);

@@ -14,7 +14,7 @@ module.exports = {
 		'filter':'**/*.jsx'
 	},
 	//require配置文件路径，相对于webresource目录
-	'config':'components.js',
+	'config':'kirin.js',
 	//requirejs 依赖扩展，相对于webresource的路径
 	'paths':{
 		'require':'libs/require',

@@ -4,6 +4,11 @@
 */
 
 require.config({
+	'paths':{
+	}
+});
+
+require.config({
 	'paths': {
 		'jsx.UILayer':'components/templates/jsx.UILayer',
 		'jsx.UILayerList':'components/templates/jsx.UILayerList',
@@ -37,5 +42,22 @@ require.config({
 		'UIList':'components/UIList',
 		'UISelect':'components/UISelect',
 		'UISelectGroup':'components/UISelectGroup'
+	}
+});
+
+require.config({
+	'paths':{
+		'Application':'app/Application',
+		'Engines':'app/Engines',
+		'ControllerBase':'app/ControllerBase',
+		'History':'app/History',
+		'LocalStorageBase':'app/LocalStorageBase',
+		'Store':'app/Store',
+		'Router':'app/Router',
+		'Url':'app/Url',
+		'ViewBase':'app/ViewBase',
+		'ViewContainer':'app/ViewContainer',
+		'Logger':'app/Logger',
+		'ModelBase':'app/ModelBase'
 	}
 });

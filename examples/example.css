@@ -1,5 +1,6 @@
 .view{
 	margin-bottom: 44px;
+	display: block;
 }
 .example {
 	padding: 15px;

@@ -3,9 +3,9 @@ css/main.css
 ----------------
 css/main.css
 
-components.js
+kirin.js
 ----------------
-components.js
+kirin.js
 components/templates/jsx.UILayer.js
 components/templates/jsx.UILayerList.js
 components/templates/jsx.UIToolbars.js
@@ -33,6 +33,18 @@ components/UIToast.js
 components/UIList.js
 components/UISelect.js
 components/UISelectGroup.js
+app/Url.js
+app/Logger.js
+app/ViewContainer.js
+app/Engines.js
+app/ControllerBase.js
+app/Router.js
+app/LocalStorageBase.js
+app/History.js
+app/Application.js
+app/Store.js
+app/ViewBase.js
+app/ModelBase.js
 
 libs.js
 ----------------

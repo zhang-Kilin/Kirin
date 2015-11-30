@@ -13,8 +13,23 @@ define('ComponentBase', [], function() {
 			this.$el.appendTo($('#components'));
 		},
 		render: function() {},
-		show: function() {},
-		hide: function() {}
+		show:function(){
+			this.trigger('show');
+			this.$el.show();
+			this.trigger('shown');
+			return this;
+		},
+		hide:function(){
+			this.trigger('hide');
+			this.$el.hide();
+			this.trigger('hidden');
+			return this;
+		},
+		destroy:function(){
+			this.trigger('destroy');
+			this.$el.remove();
+			this.trigger('destroyed');
+		}
 	});
 	return Backbone.View.extend(e);
 })

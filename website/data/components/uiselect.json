@@ -1,0 +1,65 @@
+{
+	"name":"UISelect",
+	"file":{
+		"path":"../src/components/UISelect.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=components/uilayerlist]UILayerList[/link] select组件，仿ios的select效果",
+		"updatetime":"2015-11-25"
+	},
+	"see":"../examples/select.html",
+	"apis":{
+		"Members":{
+			"options":{
+				"qualifier":"",
+				"returnType":"Object",
+				"description":"组件的配置项，extend [link=components/uilayerlist]UILayerList.options[/link]",
+				"parameters":{
+					"onchange":{
+						"type":"function",
+						"description":"当前选中的Item发生变化时的回调函数，可通过注册[code]change[/code]事件监听select的change变化，有默认的行为，不推荐用户覆盖该行为",
+						"parameters":{
+							"item":{
+								"type":"Object",
+								"description":"当前选中的Item对象数据模型"
+							}
+						}
+					},
+					"children":{
+						"type":"Array",
+						"description":"SelectItem数据集合",
+						"parameters":{
+							"":{
+								"type":"Object",
+								"description":"Item数据，可以是string或者Object",
+								"parameters":{
+									"text":{
+										"type":"string",
+										"description":"要显示在SelectItem上的文本"
+									},
+									"selected":{
+										"type":"boolean",
+										"description":"当前是否选中，仅能有一个item被[code]selected[/code]"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"Instance Methods":{
+			"value":{
+				"qualifier":"",
+				"arguments":"()",
+				"returnType":"Object",
+				"description":"获取当前Select的值"
+			}
+		}
+	},
+	"example":{
+		"type":"javascript",
+		"path":"uiselect.js",
+		"exec":true
+	}
+}

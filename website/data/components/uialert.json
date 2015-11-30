@@ -1,0 +1,63 @@
+{
+	"name":"UIAlert",
+	"file":{
+		"path":"../src/components/UIAlert.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=components/uilayer]UILayer[/link] alert提示框",
+		"updatetime":"2015-11-25"
+	},	
+	"see":"../examples/alert.html",
+	"apis":{
+		"Members":{
+			"options":{
+				"qualifier":"",
+				"returnType":"Object",
+				"description":"组件的配置项，extend [link=components/uilayer]UILayer.options[/link]",
+				"parameters":{
+					"buttons":{
+						"type":"Array",
+						"description":"提示框底部的按钮组，默认有一个按钮，点击后关闭提示框",
+						"parameters":{
+							"text":{
+								"type":"string",
+								"description":"按钮显示的文本"
+							},
+							"handle":{
+								"type":"function",
+								"description":"点击按钮后的处理函数"
+							}
+						}
+					}
+				}
+			}
+		},
+		"Instance Methods":{
+			"show":{
+				"qualifier":"",
+				"arguments":"(content,title,callback)",
+				"returnType":"",
+				"description":"显示Alert提示框",
+				"parameters":{
+					"content":{
+						"type":"string",
+						"description":"提示框显示的内容"
+					},
+					"title":{
+						"type":"string",
+						"description":"提示框的标题，如果为空，则不显示标题"
+					},
+					"callback":{
+						"type":"function",
+						"description":"Alert提示框关闭后的回调函数"
+					}
+				}
+			}
+		}
+	},
+	"example":{
+		"type":"javascript",
+		"path":"uialert.js",
+		"exec":true
+	}
+}

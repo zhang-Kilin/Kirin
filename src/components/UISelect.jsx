@@ -6,7 +6,7 @@ define('UISelect',['react','react-dom','jsx.UISelect','UILayerList','jsx.UILayer
 //		},
 		getDefaults:function(){
 			return _.extend($super.getDefaults.apply(this,arguments),{
-				onchange:$.proxy(this._onchange,this)
+				onchange:this._onchange
 			});
 		},
 		render:function(){
@@ -24,13 +24,13 @@ define('UISelect',['react','react-dom','jsx.UISelect','UILayerList','jsx.UILayer
 					this.refs.UILayerList.hide();
 				}
 			});
+			//proxy
+			this.options.onchange = $.proxy(this.options.onchange,this);
+
 			this.Component = ReactDOM.render(React.createElement(cls,{
 						options:this.options,
 						layerOptions:this._layoutOptions
 					},this.options.children),this.$el[0]);
-		},
-		createElement:function(){
-			
 		},
 		_onchange:function(item){
 			this.trigger('change',item);

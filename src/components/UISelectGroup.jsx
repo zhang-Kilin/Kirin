@@ -6,9 +6,9 @@ define('UISelectGroup',['react','react-dom','jsx.UISelectGroup','UILayerList','j
 //		},
 		getDefaults:function(){
 			return _.extend($super.getDefaults.apply(this,arguments),{
-				oncancel:$.proxy(this.hide,this),
-				onchange:$.proxy(this._onchange,this),
-				onitemchange:$.proxy(this._onitemchange,this),
+				oncancel:this.hide,
+				onchange:this._onchange,
+				onitemchange:this._onitemchange,
 			});
 		},
 		render:function(){
@@ -28,6 +28,11 @@ define('UISelectGroup',['react','react-dom','jsx.UISelectGroup','UILayerList','j
 					this.refs.UILayerList.hide();
 				}
 			});
+			//proxy
+			this.options.oncancel = $.proxy(this.options.oncancel,this);
+			this.options.onchange = $.proxy(this.options.onchange,this);
+			this.options.onitemchange = $.proxy(this.options.onitemchange,this);
+			
 			this.Component = ReactDOM.render(React.createElement(cls,{
 						options:this.options,
 						layerOptions:this._layoutOptions

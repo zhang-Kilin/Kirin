@@ -96,7 +96,9 @@
 	-o-transform: translateY(0%);
 	transform: translateY(0%);
 }
-.view {}
+.view {
+	display: none;
+}
 /*
  * Header
  */
@@ -186,17 +188,6 @@
 }
 .ui-modal .modal-footer .btn.btn-default {
 	color: #5BC0DE;
-}
-
-@media only screen and (min-width: 0px) and (max-width: 300px) {
-	.ui-modal{
-		width: 90%;
-	}
-}
-@media only screen and (min-width: 1024px){
-	.ui-modal{
-		width: 580px;
-	}
 }
 /* 
  * Toast
@@ -589,3 +580,18 @@
 .tree a:active,
 .tree a:hover{text-decoration: none;}
 .tree .leaf>a:active{background: #337ab7;color: #fff}
+
+
+/*
+	响应式
+*/
+@media only screen and (min-width: 0px) and (max-width: 300px) {
+	.ui-modal,.toast{
+		width: 90%;
+	}
+}
+@media only screen and (min-width: 1024px){
+	.ui-modal,.toast{
+		width: 580px;
+	}
+}

@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../dest/webresource/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="example.css" />
 		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
-		<script src="../dest/webresource/components.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/kirin.js" type="text/javascript" charset="utf-8" exclude="1"></script>
 		<script src="example.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
@@ -160,6 +160,40 @@ $('#list-event').click(function(){
 						</div>
 					</div>
 				</div>
+
+				<div class="example">
+						<div class="example-title">
+							<h2>高级用法</h2>
+						</div>
+						<p class="example-description">
+							通过renderItem，更改Item的渲染
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="list7" class="btn btn-default">show list</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var list7 = new UIList({
+	children:country,
+	renderItem:function(item){
+		return React.createElement('span',null,
+			React.createElement('span',null,item.text),
+			React.createElement('span',{className: item.value == 5 ? 'text-danger' : 'text-success'},'（'+item.value+'）')
+		);
+	}
+});
+$('#list7').click(function(){
+	list7.show();
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="footer" class="footer">
 			</div>
@@ -245,9 +279,21 @@ $('#list-event').click(function(){
 					$('#list-event').click(function(){
 						evt.show();
 					});
+
+					var list7 = new UIList({
+						children:country,
+						renderItem:function(item){
+							return React.createElement('span',null,
+								React.createElement('span',null,item.text),
+								React.createElement('span',{className: item.value == 5 ? 'text-danger' : 'text-success'},'（'+item.value+'）')
+							);
+						}
+					});
+					$('#list7').click(function(){
+						list7.show();
+					});
 				});
 			});
 		</script>
 	</body>
-<script type="text/javascript" src="http://10.32.76.29:8088/target/target-script-min.js#anonymous"></script>
 </html>

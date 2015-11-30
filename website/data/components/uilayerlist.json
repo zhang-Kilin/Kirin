@@ -1,0 +1,51 @@
+{
+	"name":"UILayerList",
+	"file":{
+		"path":"../src/components/UILayerList.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=components/component]Component[/link] 构建从底部弹出的容器",
+		"updatetime":"2015-11-25"
+	},
+	"apis":{
+		"Members":{
+			"options":{
+				"qualifier":"",
+				"returnType":"Object",
+				"default":{
+					"fade": true,
+					"backdrop":true,
+					"keybord":true
+				},
+				"description":"组件的配置项",
+				"parameters":{
+					"fade":{
+						"type":"boolean",
+						"description":"组件显示隐藏时是否有动画效果"
+					},
+					"backdrop":{
+						"type":"boolean",
+						"description":"组件渲染时是否有半透的背景遮罩"
+					},
+					"keybord":{
+						"type":"boolean",
+						"description":"当组件有背景遮罩时，点击背景遮罩是否关闭组件"
+					}
+				}
+			}
+		},
+		"Methods":{
+			"createElement":{
+				"qualifier":"abstract",
+				"arguments":"()",
+				"returnType":"ReactElement",
+				"description":"创建子组件，该组件将被渲染到UILayerList容器中"
+			}
+		}
+	},
+	"example":{
+		"type":"javascript",
+		"path":"uilayerlist.js",
+		"exec":true
+	}
+}

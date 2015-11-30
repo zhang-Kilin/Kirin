@@ -17,18 +17,24 @@ define('UIHeader', ['react', 'react-dom', 'ComponentBase', 'jsx.UIHeader'], func
 			this.Component = ReactDOM.render(<UIHeader {...this.options}/>,this.$el[0]);
 		},
 		show:function(title,toolbar,handles){
+			if (_.isObject(title)) {
+				handles = title.handles;
+				toolbar = title.toolbar;
+				title = title.title;
+			};
 			var props = {
 				title:title,
 				toolbar:toolbar || this.options.toolbar || [],
 				handles:_.extend({}, this.options.handles, handles)
 			};
 			$.extend(true,this.options,{
+				show:true,
 				title:title,
 				toolbar:toolbar,
 				handles:handles
 			});
 			this.render();
-			this.Component.show();
+			// this.Component.show();
 			this.trigger('shown');
 		},
 		hide:function(){

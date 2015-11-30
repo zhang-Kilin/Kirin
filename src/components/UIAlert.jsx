@@ -5,11 +5,16 @@ define('UIAlert', ['react', 'react-dom', 'UILayer', 'jsx.UIModal'], function(Rea
 			return _.extend($super.getDefaults.apply(this,arguments),{
 				buttons: [{
 					text: '知道了',
-					handle: $.proxy(this.hide, this)
+					handle: function(){
+						this.hide();
+					}
 				}]
 			});
 		},
 		createElement:function(){
+			_.each(this.options.buttons,$.proxy(function(item){
+				item.handle = $.proxy(item.handle,this);
+			},this));
 			return <UIModal {...this.options}>{this.options.children}</UIModal>;
 		},
 		hide: function() {

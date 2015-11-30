@@ -5,7 +5,8 @@ define('jsx.UIList',['react','jsx.UILayerList'],function(React,UILayerList){
 		getDefaultProps:function(){
 			return {
 				onselect:function(){},
-				oncancel:function(){}
+				oncancel:function(){},
+				renderItem:function(item){return typeof item === 'string'? item : item.text;}
 			};
 		},
 		render:function(){
@@ -31,11 +32,17 @@ define('jsx.UIList',['react','jsx.UILayerList'],function(React,UILayerList){
 		createItems:function(){
 			var results = [];
 			if(this.props.children && this.props.children.length){
-				_.each(this.props.children,function(item,i){
-					results.push(<a href="javascript:;" data-index={i} className="btn btn-lg btn-default">{typeof item === 'string'? item : item.text}</a>);
-				});
+				_.each(this.props.children,$.proxy(function(item,i){
+					results.push(<a href="javascript:;" data-index={i} className="btn btn-lg btn-default">{this.renderItem(item)}</a>);
+				},this));
 			}
 			return results;
+		},
+		renderItem:function(item){
+			if (_.isFunction(this.props.renderItem)) {
+				return this.props.renderItem(item);
+			};
+			return typeof item === 'string'? item : item.text;
 		}
 	});
 	
