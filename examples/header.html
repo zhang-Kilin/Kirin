@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../webresource/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="example.css" />
+		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/kirin.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="example.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header">
+			</div>
+			<div id="viewport" class="viewport">
+				<div class="view">
+					<div class="example">
+						<div class="example-title">
+							<h2>Header</h2>
+						</div>
+						<p class="example-description">
+							头部，默认会渲染到 <span class="text-danger">#header</span> 容器中
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<button id="btnheader" class="btn btn-default">更改Title</button>
+							</div>
+							<div class="example-code">
+								<pre>
+var i = 0;
+var header1 = new UIHeader();
+$('#btnheader').click(function(){
+	header1.show("UIHeader - "+(++i));
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>render</h2>
+						</div>
+						<p class="example-description">
+							指定渲染容器
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="header2"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var header2 = new UIHeader({
+	title:'渲染到指定容器',
+	render:'#header2'
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Toolbar</h2>
+						</div>
+						<p class="example-description">
+							工具栏，一行最多显示3个tool，超出的将自动转换为menu菜单，<br>
+							目前已经定义的tool列表：<span class="text-danger">home、earphone、share、edit、login、logout、cog、refresh、user、trash、barcode、qrcode、heart、search、favorite、print、envelope、plus、calendar</span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="header3"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var header3 = new UIHeader({
+	title:'渲染到指定容器',
+	render:'#header3',
+	//定义工具栏
+	toolbar:['home','share','search','favorite','print']
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>Handles</h2>
+						</div>
+						<p class="example-description">
+							toolbar的事件响应，事件响应规则：<span class="text-danger">'on' + name</span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="header4"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var header4 = new UIHeader({
+	title:'渲染到指定容器',
+	render:'#header4',
+	//定义工具栏
+	toolbar:['home','share','search','favorite','print'],
+	handles:{
+		onhome:function(){
+			alert('HOME');
+		},
+		onshare:function(){
+			alert('SHARE');
+		},
+		onsearch:function(){
+			alert('SEARCH');
+		},
+		onfavorite:function(){
+			alert('FAVORITE');
+		},
+		onprint:function(){
+			alert('PRINT');
+		}
+	}
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>特殊的Handle onback</h2>
+						</div>
+						<p class="example-description">
+							响应左边返回键的单击
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="header5"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var header5 = new UIHeader({
+	title:'渲染到指定容器',
+	render:'#header5',
+	handles:{
+		onback:function(){
+			alert('BACK');
+		}
+	}
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>show</h2>
+						</div>
+						<p class="example-description">
+							show方法支持动态更改Header的相关属性：<span class="text-danger">title、toolbar、handles</span>
+							<br>
+							方法定义如下：<span class="text-danger">function(title,toolbar,handles){}</span>
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="header6"></div>
+								<p>
+									<button id="header-show" class="btn btn-default">show</button>
+								</p>
+							</div>
+							<div class="example-code">
+								<pre>
+var header6 = new UIHeader({
+	title:'渲染到指定容器',
+	render:'#header6',
+	handles:{
+		onback:function(){
+			alert('BACK');
+		}
+	}
+});
+
+$('#header-show').click(function(){
+	//动态更改header的属性
+	header6.show('Hello world',['home'],{
+		onback:function(){
+			alert('hi back');
+		},
+		onhome:function(){
+			alert('hi home');
+		}
+	});
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+
+					<div class="example">
+						<div class="example-title">
+							<h2>高级用法</h2>
+						</div>
+						<p class="example-description">
+							定制化tool
+						</p>
+						<div class="example-content">
+							<div class="example-model">
+								<div id="header7"></div>
+							</div>
+							<div class="example-code">
+								<pre>
+var header7 = new UIHeader({
+	title:'渲染到指定容器',
+	render:'#header7',
+	toolbar:[
+		{
+			//icon图表，详见http://v3.bootcss.com/components/#glyphicons
+			'icon':'stats',
+			//显示文本
+			'text':'图表',
+			//响应的处理函数
+			'handle':function(){
+				alert('图表');
+			}
+		}
+	]
+});
+								</pre>
+							</div>
+						</div>
+						<div class="example-footer">
+							<a href="javascript:;" class="example-btn">show code</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				require(['UIHeader','react'], function(UIHeader,React) {
+					var i = 0;
+					var header1 = new UIHeader({
+						title:'UIHeader',
+						handles:{
+							onback:function(){
+								location.assign('index.html');								
+							}
+						}
+					});
+					$('#btnheader').click(function(){
+						header1.show("UIHeader - "+(++i));
+					});
+
+					var header2 = new UIHeader({
+						title:'渲染到指定容器',
+						render:'#header2'
+					});
+
+					var header3 = new UIHeader({
+						title:'渲染到指定容器',
+						render:'#header3',
+						//定义工具栏
+						toolbar:['home','share','search','star-empty','print']
+					});
+
+					var header4 = new UIHeader({
+						title:'渲染到指定容器',
+						render:'#header4',
+						//定义工具栏
+						toolbar:['home','share','search','favorite','print'],
+						handles:{
+							onhome:function(){
+								alert('HOME');
+							},
+							onshare:function(){
+								alert('SHARE');
+							},
+							onsearch:function(){
+								alert('SEARCH');
+							},
+							onfavorite:function(){
+								alert('FAVORITE');
+							},
+							onprint:function(){
+								alert('PRINT');
+							}
+						}
+					});
+
+					var header5 = new UIHeader({
+						title:'渲染到指定容器',
+						render:'#header5',
+						handles:{
+							onback:function(){
+								alert('BACK');
+							}
+						}
+					});
+
+					var header6 = new UIHeader({
+						title:'渲染到指定容器',
+						render:'#header6',
+						handles:{
+							onback:function(){
+								alert('BACK');
+							}
+						}
+					});
+
+					$('#header-show').click(function(){
+						//动态更改header的属性
+						header6.show('Hello world',['home'],{
+							onback:function(){
+								alert('hi back');
+							},
+							onhome:function(){
+								alert('hi home');
+							}
+						});
+					});
+
+					var header7 = new UIHeader({
+						title:'渲染到指定容器',
+						render:'#header7',
+						toolbar:[
+							{
+								//icon图表，详见http://v3.bootcss.com/components/#glyphicons
+								'icon':'stats',
+								//显示文本
+								'text':'图表',
+								//响应的处理函数
+								'handle':function(){
+									alert('图表');
+								}
+							}
+						]
+					});
+				})
+			});
+		</script>
+	</body>
+
+</html>

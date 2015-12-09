@@ -1,0 +1,10 @@
+{
+	"name":"ModelBase",
+	"file":{
+		"path":"app/ModelBase.js",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=http://www.css88.com/doc/backbone/#Model]Backbone.Model[/link] 数据模型基类，该类暂时为保留类，会在后续版本中进行扩充",
+		"updatetime":"2015-11-25"
+	}
+}

@@ -1,0 +1,79 @@
+[
+	{
+		"title":"Alert弹窗",
+		"description":"基本用法，带半透明遮罩，动画",
+		"code":"\
+require([\"UIAlert\"], function(UIAlert) {\n\
+	var normalAlert = new UIAlert();\n\
+	$(\"#alert\").click(function(){\n\
+		normalAlert.show(\"开关热i哦我附件的思考过\");\n\
+	});\n\
+})",
+		"children":"var React=require(\"react\"),ReactDOM=require(\"react-dom\");return React.createElement('button',{id:'alert',className:'btn btn-default',children:'Alert'})"
+	},
+	{
+		"title":"Title",
+		"description":"有标题栏的UIAlert，如果title为空，则不显示标题栏",
+		"code":"\
+require([\"UIAlert\"], function(UIAlert) {\n\
+	var titleAlert = new UIAlert();\n\
+	$('#alert-title').click(function() {\n\
+		titleAlert.show(\"带Title的UIAlert\",'UIAlert Title');\n\
+	});\n\
+})",
+		"children":"var React=require(\"react\"),ReactDOM=require(\"react-dom\");return React.createElement('button',{id:'alert-title',className:'btn btn-default',children:'Alert'})"
+	},
+	{
+		"title":"Options",
+		"description":"通过options参数配置alert",
+		"code":"\
+require([\"UIAlert\"], function(UIAlert) {\n\
+	var optionAlert = new UIAlert({\n\
+		//是否开启动画效果\n\
+		fade: false,\n\
+		//是否有半透明遮罩\n\
+		backdrop: false,\n\
+		//遮罩是否响应点击关闭事件\n\
+		keybord: false\n\
+	});\n\
+	$('#alert-options').click(function() {\n\
+		optionAlert.show('开关热i哦我附件的思考过');\n\
+	});\n\
+})",
+		"children":"var React=require(\"react\"),ReactDOM=require(\"react-dom\");return React.createElement('button',{id:'alert-options',className:'btn btn-default',children:'Alert'})"
+	},
+	{
+		"title":"Callback",
+		"description":"响应关闭后的回调函数，注意 <span class=\"text-danger\">如果有动画效果，则回调函数会在动画执行之前就被触发，如果需要监听动画完全执行完毕的事件，请参见 <a href=\"#event\">event</a></span>",
+		"code":"\
+require([\"UIAlert\"], function(UIAlert) {\n\
+	var callbackAlert = new UIAlert();\n\
+	$('#alert-callback').click(function() {\n\
+		callbackAlert.show(\"响应回调函数的用法\",function(){\n\
+			alert('回调函数响应');\n\
+		});\n\
+	});\n\
+})",
+		"children":"var React=require(\"react\"),ReactDOM=require(\"react-dom\");return React.createElement('button',{id:'alert-callback',className:'btn btn-default',children:'Alert'})"
+	},
+	{
+		"title":"Event",
+		"description":"监听UIAlert事件",
+		"code":"\
+require([\"UIAlert\"], function(UIAlert) {\n\
+	var eventAlert = new UIAlert();\n\
+	eventAlert.on('hidden',function(){\n\
+		alert('hidden');\n\
+	});\n\
+	eventAlert.on('shown',function(){\n\
+		alert('shown');\n\
+	});\n\
+	$('#alert-event').click(function() {\n\
+		eventAlert.show(\"UIAlert事件监听\",function(){\n\
+			alert('回调函数')\n\
+		});\n\
+	});\n\
+})",
+		"children":"var React=require(\"react\"),ReactDOM=require(\"react-dom\");return React.createElement('button',{id:'alert-event',className:'btn btn-default',children:'Alert'})"
+	}
+]

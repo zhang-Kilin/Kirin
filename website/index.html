@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" type="text/css" href="styles/jaguar.css" />
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../dest/webresource/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="styles/styles/github.css" />
+		<link rel="stylesheet" type="text/css" href="styles/site.css" />
+		<script src="styles/highlight.pack.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/libs.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+		<script src="../dest/webresource/kirin.js" type="text/javascript" charset="utf-8" exclude="1"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header" style="display:none">
+			</div>
+			<div class="example-table">
+				<div id="navigate" class="cell example-navigate">
+				</div>
+				<div class="cell example-main">
+					<div id="viewport" class="viewport">
+					</div>
+				</div>
+			</div>
+			
+			<div id="footer" class="footer">
+			</div>
+		</div>
+		<div id="components">
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		
+		<script src="config.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			$(function(){
+				$('pre').each(function(i,block){
+					hljs.highlightBlock(block);
+				});
+			})
+		</script>
+
+		<script type="text/javascript">
+			// require(['Store'],function(Store){
+			// 	var store = Store.extend({key:'TEST'}).instance();
+			// 	store.set('test.k.haha.ui.jdk','8854');
+			// 	console.log(store.get('test.k.haha.ui'));
+			// 	store.remove('test.k.haha.ui.jdk');
+			// 	console.log(store.get('test.k.haha'));
+			// })
+		</script>
+
+		<script type="text/javascript">
+// 			$(function(){
+// 				require(['UIHeader'],function(UIHeader){
+// 					new UIHeader({
+// 						title:'Component Example',
+// 						handles:{
+// 							onback:function(){
+// //								location.assign('index.html');
+// 							}
+// 						}
+// 					});
+// 				})
+// 			});
+		</script>
+
+		<script type="text/javascript">
+			$(function(){
+				require(['Application','routes'],function(App,routes){
+					App.config({
+						routes:routes,
+						root:'/website/'
+					});
+					App.start();
+				})
+			});
+
+		</script>
+
+		<script type="text/javascript">
+			// $(function(){
+			// 	$.ajax({
+			// 		url:'data/alert.json',
+			// 		dataType:'text',
+			// 		type:'get',
+			// 		success:function(data){
+			// 			data = eval('('+data+')');
+			// 			require(['react','react-dom','jsx.Example'],function(React,ReactDOM,Example){
+			// 				ReactDOM.render(React.createElement('div',
+			// 					null,
+			// 					_.map(data,function(item){
+			// 						item.children = new Function(item.children)();
+			// 						return React.createElement(Example,item);
+			// 					})
+			// 				),$('.view')[0]);
+			// 			});						
+			// 		},
+			// 		error:function(){
+			// 			var t = arguments;
+			// 		}
+			// 	});
+				
+			// })
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,47 @@
+{
+	"name":"UIToast",
+	"file":{
+		"path":"../src/components/UIToast.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=components/uilayer]UILayer[/link] toast提示框，默认2秒后自动关闭",
+		"updatetime":"2015-11-25"
+	},
+	"see":"../examples/toast.html",
+	"apis":{
+		"Members":{
+			"options":{
+				"qualifier":"",
+				"returnType":"Object",
+				"description":"组件的配置项，extend [link=components/uilayer]UILayer.options[/link]"
+			}
+		},
+		"Instance Methods":{
+			"show":{
+				"qualifier":"",
+				"arguments":"(content,duration,callback)",
+				"returnType":"",
+				"description":"显示Toast提示框",
+				"parameters":{
+					"content":{
+						"type":"string",
+						"description":"提示框显示的内容"
+					},
+					"duration":{
+						"type":"int",
+						"description":"提示框自动关闭的时间，[code]秒[/code]为单位"
+					},
+					"callback":{
+						"type":"function",
+						"description":"Toast提示框关闭后的回调函数"
+					}
+				}
+			}
+		}
+	},
+	"example":{
+		"type":"javascript",
+		"path":"uitoast.js",
+		"exec":true
+	}
+}

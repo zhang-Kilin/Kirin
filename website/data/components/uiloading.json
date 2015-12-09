@@ -1,0 +1,47 @@
+{
+	"name":"UILoading",
+	"file":{
+		"path":"../src/components/UILoading.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=components/uilayer]UILayer[/link] Loading加载动画",
+		"updatetime":"2015-11-25"
+	},
+	"see":"../examples/loading.html",
+	"apis":{
+		"Members":{
+			"options":{
+				"qualifier":"",
+				"returnType":"Object",
+				"description":"组件的配置项，extend [link=components/uilayer]UILayer.options[/link]"
+			}
+		},
+		"Instance Methods":{
+			"show":{
+				"qualifier":"",
+				"arguments":"(content,duration,callback)",
+				"returnType":"",
+				"description":"显示Loading动画",
+				"parameters":{
+					"content":{
+						"type":"string",
+						"description":"Loading动画显示的文本内容"
+					},
+					"duration":{
+						"type":"int",
+						"description":"提示框自动关闭的时间，[code]秒[/code]为单位"
+					},
+					"callback":{
+						"type":"function",
+						"description":"Loading关闭后的回调函数"
+					}
+				}
+			}
+		}
+	},
+	"example":{
+		"type":"javascript",
+		"path":"uiloading.js",
+		"exec":true
+	}
+}

@@ -1,0 +1,98 @@
+html,document,body{
+	height:100%;
+}
+.main{
+	height: 100%;
+	padding: 0;
+	margin: 0
+}
+.view{
+	margin-bottom: 44px;
+}
+.example {
+	padding: 15px;
+}
+.example-title {} .example-description {
+	text-indent: 25px;
+}
+.example-content {
+	position: relative;
+	border-radius: 6px;
+	border: 1px solid #CCCCCC;
+	border-bottom-right-radius: 0;
+	padding: 44px 15px 10px;
+}
+.example-content:after {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #959595;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	content: "Example";
+}
+.example-model {
+	position: relative;
+	margin-bottom: 15px;
+}
+.example-code {
+	display: none;
+}
+.example-footer {
+	background: #FFFFFF;
+	margin-top: -1px;
+	border: 1px solid #CCCCCC;
+	border-top: 0;
+	border-radius: 6px;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	float: right;
+	position: relative;
+	padding: 5px 10px;
+}
+.example-btn {
+	background: #FFFFFF;
+	
+}
+.example-table{
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+.example-table .cell{
+	display: table-cell;
+	width: 1%;
+}
+.example-navigate,
+.example-main{
+	height: 100%;
+	border-right:1px solid #ccc;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    padding: 0;
+    margin: 0;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+.example-main{
+	width: auto !important;
+	border:0;
+}
+.example-navigate{
+	width: 200px !important;
+	max-width: 200px !important;
+}
+
+.run{
+	position: relative;
+	float: right;
+	margin-right: 20px;
+}
+
+.example-code-container{
+	
+}
+.example-code-container>h3{
+	line-height: 30px;
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,width=device-width, initial-scale=1" />
+		<title id="title"></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="webresource/css/main.css" />
+		<script src="webresource/libs/require.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">						
+			require.config({
+				'baseUrl':'/webresource',
+				'paths':{
+					'react':'libs/react.min',
+					'react-dom':'libs/react-dom.min',
+					'jquery':'libs/jquery.min',
+					'underscore':'libs/underscore'
+				},
+				shim: {
+					jquery: {
+						exports: '$'
+					},
+					underscore: {
+						exports: '_'
+					}
+				}
+			});
+		</script>
+		<script src="webresource/libs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="webresource/libs/date-util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div id="header">
+			</div>
+			<div id="viewport" class="viewport">
+			</div>
+			<div id="footer" class="footer">
+			</div>
+
+			<a id="alert" href="javascript:;" class="btn btn-default">Alert</a>
+			<a id="loading" href="javascript:;" class="btn btn-default">Loading</a>
+			<a id="confirm" href="javascript:;" class="btn btn-default">Confirm</a>
+			<a id="toast" href="javascript:;" class="btn btn-default">Toast</a>
+			<a id="list" href="javascript:;" class="btn btn-default">List</a>
+			<a id="select" href="javascript:;" class="btn btn-default">Select</a>
+			<a id="select-group" href="javascript:;" class="btn btn-default">SelectGroup</a>
+			
+<a id="store" href="javascript:;" class="btn btn-default">Store</a>
+<a id="store1" href="javascript:;" class="btn btn-default">Store1</a>
+
+		</div>
+		<div id="components">
+		</div>
+		<br><br><br><br><br>
+		<div id="calendar"></div>
+
+		<br><br><br><br><br>
+		<div id="holiday-calendar"></div>
+
+		<br><br><br><br><br>
+		<div id="lunar-calendar"></div>
+		<div id="tree">
+			<!-- <div class="tree">
+				<ul>
+					<li class="limb">
+						<a href="javascript:;">
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+							<span>礼品卡</span>
+						</a>
+						<ul>
+							<li class="limb">
+								<a href="javascript:;">
+									<i class="glyphicon glyphicon-triangle-bottom"></i>
+									<span>礼品卡</span>
+								</a>
+								<ul>
+									<li class="leaf">
+										<a href="javascript:;">礼品卡</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul>
+					<li class="limb">
+						<a href="javascript:;">
+							<i class="glyphicon glyphicon-triangle-bottom"></i>
+							<span>礼品卡</span>
+						</a>
+						<ul>
+							<li class="limb">
+								<a href="javascript:;">
+									<i class="glyphicon glyphicon-triangle-bottom"></i>
+									<span>礼品卡</span>
+								</a>
+								<ul>
+									<li class="leaf">
+										<a href="javascript:;">礼品卡</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div> -->
+		</div>
+		<!--<div class="modal-backdrop fade in"></div>-->
+		<script src="webresource/components.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				require(['LocalStorageBase'],function(StoreBase){
+					var Store = StoreBase.extend({
+						key:'TEST'
+					}),
+						Store1 = StoreBase.extend({
+							key:'TEST1'
+						});
+
+					var status = '',
+						status1 = '',
+						store = Store.instance(),
+						store1 = Store1.instance();
+
+					$('#store').click(function(){
+						store = Store.instance();
+						if (status == '') {
+							status = '1';
+							store.set({
+								key:'hello world'
+							});
+						}else if (status == '1') {
+							status = '2';
+							console.log(store.get());
+						}else if (status == '2') {
+							status = '';
+							store.remove();
+						};
+					});
+
+					$('#store1').click(function(){
+						if (status1 == '') {
+							status1 = '1';
+							store1.set({
+								key:'my name is store1'
+							});
+						}else if (status1 == '1') {
+							status1 = '2';
+							console.log(store1.get());
+						}else if (status1 == '2') {
+							status1 = '';
+							store1.remove();
+						};
+					});
+				});
+			})
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				require(['UIHeader'],function(UIHeader){
+					new UIHeader({
+						title:'Index',
+						toolbar:[
+							{
+								//icon图表，详见http://v3.bootcss.com/components/#glyphicons
+								'icon':'stats',
+								//显示文本
+								'text':'图表',
+								//响应的处理函数
+								'handle':function(){
+									alert('图表');
+								}
+							}
+						]
+					});
+				})
+			});
+			var now = new Date;
+			var s = dateUtil.getLunarDate(now);
+			console.log(s);
+
+			$(function() {
+				var items = [{
+						text: '中国',
+						value: 0
+					}, {
+						text: '越南',
+						value: 4
+					}, {
+						text: '蒙古',
+						value: 1
+					}, {
+						text: '韩国',
+						value: 2
+					}, {
+						text: '朝鲜',
+						value: 3
+					}];
+				require(['UIAlert'],function(UIAlert){
+					var uiAlert = new UIAlert();
+					uiAlert.on('hidden',function(){
+						console.log('hidden')
+					})
+					uiAlert.on('shown',function(){
+						console.log('shown')
+					})
+					$('#alert').click(function(){
+						uiAlert.show("开关热i哦我附件的思考过",function(){
+							console.log('hidden.alert.component');
+						});
+						
+					});
+				});
+				require(['jsx.UICalendar','react','react-dom'],function(UICalendar,React,ReactDOM){
+					var calendar = ReactDOM.render(React.createElement(UICalendar,{
+						date:new Date(2015,10,1),
+						currentDate:new Date,
+						body:{
+							fill:true,
+							// disabled:[[,'2015-11-16'],['2015-11-18',]],
+							itemFormat:function(item){
+								var date = new Date(item.year,item.month-1,item.day);
+								if (date.getDay() == 0 || date.getDay() == 6) {
+									item.disabled = true;
+								};
+								// if (item.day == 15) {
+								// 	item.text = React.createElement('span',null,
+								// 			React.createElement('span',null,item.day),
+								// 			React.createElement('br'),
+								// 			React.createElement('span',null,"纪念日")
+								// 		);
+								// };
+								return item;
+							},
+							select:function(date,dateStyle,item){
+								console.log(date);
+								this.setState({
+									// date:dateStyle,
+									currentDate:dateStyle
+								});
+								// calendar.setProps({
+								// 	date:dateStyle,
+								// 	currentDate:dateStyle
+								// });
+							}
+						}
+					},null),$('#calendar')[0]);
+				});
+
+				require(['jsx.UILunarCalendar','react','react-dom'],function(UILunarCalendar,React,ReactDOM){
+					var calendar = ReactDOM.render(React.createElement(UILunarCalendar,{
+						date:new Date,
+						currentDate:null,
+						body:{
+							disabled:[[,'2015-11-5'],['2015-11-15','2015-11-20'],['2015-11-25',]],
+							fill:false,
+							itemFormat:function(item){
+								var date = new Date(item.year,item.month-1,item.day);
+								if (date.getDay() == 0 || date.getDay() == 6) {
+									item.disabled = true;
+								};
+								// if (item.day == 15) {
+								// 	item.text = React.createElement('span',null,
+								// 			React.createElement('span',null,item.day),
+								// 			React.createElement('br'),
+								// 			React.createElement('span',null,"纪念日")
+								// 		);
+								// };
+								return item;
+							},
+							select:function(date,dateStyle,item){
+								console.log(item);
+								this.setState({
+									date:dateStyle,
+									currentDate:dateStyle
+								});
+							}
+						}
+					},null),$('#lunar-calendar')[0]);
+				});
+
+				require(['jsx.UITree','jsx.UICalendar','react','react-dom'],function(UITree,UICalendar,React,ReactDOM){
+					var ele = React.createElement(UITree,{
+						expand:function(item){
+							console.log(JSON.stringify(item));
+						},
+						unexpand:function(item){
+							console.log(JSON.stringify(item));
+						},
+						callback:function(item){
+							console.log(JSON.stringify(item));
+							this.expand(item.id);
+						}
+					},[
+								{
+									text:'礼品卡',
+									expand:true,
+									children:[
+										{
+											text:'礼品卡订单数据',
+									expand:true,
+											children:[
+												{
+													text:'按订单状态查询'
+												}
+											]
+										},{
+											text:'礼品卡账户情况',
+									expand:true,
+											children:[
+												{
+													text:'按卡类型查询'
+												},{
+													text:'按项目性质查询'
+												}
+											]
+										}
+									]
+								},{
+									text:'存款证明',
+									expand:true,
+									children:[
+										{
+											text:'按订单类型查询'
+										},{
+											text:'按订单状态查询'
+										}
+									]
+								},{
+									text:'送心意',
+									expand:true,
+									children:[
+										{
+											text:'按订单类型查询'
+										}
+									]
+								}
+							]);
+					var tree = ReactDOM.render(ele,$('#tree')[0])
+					// ReactDOM.render(React.createElement(UICalendar),$('#tree')[0]);
+				});
+			});
+		</script>
+	</body>
+
+</html>
