@@ -16,10 +16,10 @@ define('Component', ['react-dom', 'UIBackdrop', 'ComponentBase'], function(React
 		},
 		render:function(){
 			if(this.options.backdrop){
-				this.backdrop = new UIBackdrop({
+				!this.backdrop && (this.backdrop = new UIBackdrop({
 					fade:this.options.fade,
 					click:$.proxy(this.hide,this)
-				});
+				}));
 			}
 		},
 		show:function(){

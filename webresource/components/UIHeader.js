@@ -22,6 +22,7 @@ define('UIHeader', ['react', 'react-dom', 'ComponentBase', 'jsx.UIHeader'], func
 				toolbar = title.toolbar;
 				title = title.title;
 			};
+			
 			var props = {
 				title:title,
 				toolbar:toolbar || this.options.toolbar || [],

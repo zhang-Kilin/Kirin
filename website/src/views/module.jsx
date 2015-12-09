@@ -19,6 +19,9 @@ define(['react','react-dom','View','Url'],function(React,ReactDOM,View,Url){
 					case "see":
 						results = results.concat(this.createSeeElement(model));
 						break;
+					case "img":
+						results = results.concat(this.createImgElement(model));
+						break;
 					case "apis":
 						results = results.concat(this.createApiElements(model));
 						break;
@@ -30,12 +33,19 @@ define(['react','react-dom','View','Url'],function(React,ReactDOM,View,Url){
 			},this));
 			return results;
 		},
+		createImgElement:function(model){
+			if (!model || !model.img) {
+				return;
+			};
+			var url = new Url(model.img);
+			return [<img src={url.href} />];
+		},
 		createSeeElement:function(model){
 			if (!model || !model.see) {
 				return;
 			};
 			var see = new Url(model.see).href;
-			return <article>
+			return [<article>
 						<dl className="details">
 						    <dt className="tag-see">See:</dt>
 						    <dd className="tag-see">
@@ -44,7 +54,7 @@ define(['react','react-dom','View','Url'],function(React,ReactDOM,View,Url){
 						        </ul>
 						    </dd>
 						</dl>
-					</article>;
+					</article>];
 		},
 		createHeaderElement:function(model){
 			if (!model) {

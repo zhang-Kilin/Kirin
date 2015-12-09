@@ -44,20 +44,3 @@ require.config({
 		'UISelectGroup':'components/UISelectGroup'
 	}
 });
-
-require.config({
-	'paths':{
-		'Application':'app/Application',
-		'Engines':'app/Engines',
-		'ControllerBase':'app/ControllerBase',
-		'History':'app/History',
-		'LocalStorageBase':'app/LocalStorageBase',
-		'Store':'app/Store',
-		'Router':'app/Router',
-		'Url':'app/Url',
-		'ViewBase':'app/ViewBase',
-		'ViewContainer':'app/ViewContainer',
-		'Logger':'app/Logger',
-		'ModelBase':'app/ModelBase'
-	}
-});

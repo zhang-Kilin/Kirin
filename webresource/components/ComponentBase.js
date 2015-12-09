@@ -10,7 +10,7 @@ define('ComponentBase', [], function() {
 			return {};
 		},
 		initialDocumentElement: function() {
-			this.$el.appendTo($('#components'));
+			this.$el.hide().appendTo($('#components'));
 		},
 		render: function() {},
 		show:function(){

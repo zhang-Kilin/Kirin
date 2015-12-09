@@ -1,12 +1,13 @@
 define('UISelect',['react','react-dom','jsx.UISelect','UILayerList','jsx.UILayerList'],function(React,ReactDOM,UISelect,UILayerList,JsxUILayerList){
 	var $super = UILayerList.prototype;
 	return UILayerList.extend({
-//		initialize:function(){
-//			$super.initialize.apply(this,arguments);
-//		},
+		initialize:function(){
+			$super.initialize.apply(this,arguments);
+		},
 		getDefaults:function(){
+			this._self = this;
 			return _.extend($super.getDefaults.apply(this,arguments),{
-				onchange:this._onchange
+				onchange:$.proxy(this._onchange,this)
 			});
 		},
 		render:function(){
@@ -24,9 +25,6 @@ define('UISelect',['react','react-dom','jsx.UISelect','UILayerList','jsx.UILayer
 					this.refs.UILayerList.hide();
 				}
 			});
-			//proxy
-			this.options.onchange = $.proxy(this.options.onchange,this);
-
 			this.Component = ReactDOM.render(React.createElement(cls,{
 						options:this.options,
 						layerOptions:this._layoutOptions

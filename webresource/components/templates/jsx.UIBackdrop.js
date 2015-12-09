@@ -11,6 +11,8 @@ define('jsx.UIBackdrop', ['react'], function(React) {
 		getDefaultProps: function() {
 			return {
 				fade: true,
+				onshow:function(){},
+				onhide:function(){},
 				click: function(){}
 			};
 		},
@@ -47,12 +49,18 @@ define('jsx.UIBackdrop', ['react'], function(React) {
 					this.setState({
 						in:true
 					});
+					if (_.isFunction(this.props.onshow)) {
+						this.props.onshow();
+					};
 				},this),UIBackdrop.TRANSACTION_DURATION);
 			}else{
 				this.setState({
 					show:true,
 					in:true
 				});
+				if (_.isFunction(this.props.onshow)) {
+					this.props.onshow();
+				};
 			}
 		},
 		hide:function(){
@@ -60,9 +68,15 @@ define('jsx.UIBackdrop', ['react'], function(React) {
 				this.setState({in:false});
 				setTimeout($.proxy(function(){
 					this.setState({show:false});
+					if (_.isFunction(this.props.onhide)) {
+						this.props.onhide();
+					};
 				},this),UIBackdrop.TRANSACTION_DURATION);
 			}else{
 				this.setState({show:false,in:false,fade:false});
+				if (_.isFunction(this.props.onhide)) {
+					this.props.onhide();
+				};
 			}
 		}
 	});

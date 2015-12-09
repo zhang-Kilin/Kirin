@@ -12,9 +12,6 @@ define('UIAlert', ['react', 'react-dom', 'UILayer', 'jsx.UIModal'], function(Rea
 			});
 		},
 		createElement:function(){
-			_.each(this.options.buttons,$.proxy(function(item){
-				item.handle = $.proxy(item.handle,this);
-			},this));
 			return <UIModal {...this.options}>{this.options.children}</UIModal>;
 		},
 		hide: function() {

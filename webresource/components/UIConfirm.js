@@ -1,14 +1,20 @@
 define('UIConfirm', ['react', 'react-dom', 'UILayer', 'jsx.UIModal'], function(React, ReactDOM, UILayer, UIModal) {
 	var $super = UILayer.prototype;
 	return UILayer.extend({
+		initialize:function(){
+			$super.initialize.apply(this,arguments);
+			_.each(this.options.buttons,$.proxy(function(item){
+				item.handle = $.proxy(item.handle,this);
+			},this));
+		},
 		getDefaults: function() {
 			return _.extend($super.getDefaults.apply(this,arguments),{
 				buttons: [{
 					text: '确定',
-					handle: $.proxy(this._ok, this)
+					handle: this._ok
 				},{
 					text: '取消',
-					handle: $.proxy(this._cancel, this)
+					handle: this._cancel
 				}]
 			});
 		},
