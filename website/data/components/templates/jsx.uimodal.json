@@ -1,0 +1,38 @@
+{
+	"name":"jsx.UIModal",
+	"file":{
+		"path":"../src/components/templates/jsx.UIModal.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"提供了基本的模态对话框的[code]React Class[/code]模板",
+		"updatetime":"2015-11-25"
+	},
+	"see":"#code?name=UIAlert&path=../src/components/UIAlert.jsx&type=javascript",
+	"apis":{
+		"Members":{
+			"props":{
+				"qualifier":"",
+				"returnType":"Object",
+				"default":{
+					"title":"",
+					"buttons":[
+						{
+							"text":"确定",
+							"handle":null
+						},
+						{
+							"text":"取消",
+							"handle":null
+						}
+					]
+				},
+				"description":"组件的配置项"
+			}
+		}
+	},
+	"example":{
+		"type":"javascript",
+		"exec":true,
+		"path":"../templates/exams/jsx.uimodal.js"
+	}
+}

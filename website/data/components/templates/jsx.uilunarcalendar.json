@@ -1,0 +1,16 @@
+{
+	"name":"jsx.UILunarCalendar",
+	"file":{
+		"path":"../src/components/templates/jsx.UILunarCalendar.jsx",
+		"version":"0.1",
+		"author":"zhang_7150@163.com",
+		"description":"extend [link=components/templates/jsx.uicalendar]jsx.UICalendar[/link]，提供了基本的农历控件的[code]React Class[/code]模板",
+		"updatetime":"2015-11-25"
+	},
+	"see":"../examples/lunar.html",
+	"example":{
+		"type":"javascript",
+		"exec":true,
+		"path":"../templates/exams/jsx.uilunarcalendar.js"
+	}
+}

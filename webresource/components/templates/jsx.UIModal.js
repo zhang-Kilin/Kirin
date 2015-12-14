@@ -29,7 +29,7 @@ define('jsx.UIModal',['react'],function(React){
 		render:function(){
 			return React.createElement("div", {className: "layer-container ui-modal"}, 
 						this.createHeader(), 
-						React.createElement("div", {className: "moadal-body"}, 
+						React.createElement("div", {className: "modal-body"}, 
 							this.props.children
 						), 
 						this.createFooter()
@@ -53,7 +53,12 @@ define('jsx.UIModal',['react'],function(React){
 		},
 		createButtons:function(){
 			return _.map(this.props.buttons,function(item){
-				return React.createElement("a", {href: "javascript:;", className: "btn btn-default", onClick: item.handle}, item.text);
+				var fn = (function(i){
+					return function(e){
+						_.isFunction(i.handle) && i.handle(e);
+					}
+				})(item);
+				return React.createElement("a", {href: "javascript:;", className: "btn btn-default", onClick: fn}, item.text);
 			});
 		}
 	})

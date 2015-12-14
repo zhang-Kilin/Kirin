@@ -64,6 +64,27 @@
 		"expand":true,
 		"children":[
 			{
+				"text":"templates",
+				"expand":true,
+				"children":[
+					{
+						"text":"jsx.UICalendar",
+						"expand":true,
+						"link":"components/templates/jsx.uicalendar"
+					},
+					{
+						"text":"jsx.UILunarCalendar",
+						"expand":true,
+						"link":"components/templates/jsx.uilunarcalendar"
+					},
+					{
+						"text":"jsx.UIModal",
+						"expand":true,
+						"link":"components/templates/jsx.uimodal"
+					}
+				]
+			},
+			{
 				"text":"ComponentBase",
 				"expand":true,
 				"link":"components/componentbase"
@@ -97,6 +118,11 @@
 				"text":"UIAlert",
 				"expand":true,
 				"link":"components/uialert"
+			},
+			{
+				"text":"UIConfirm",
+				"expand":true,
+				"link":"components/uiconfirm"
 			},
 			{
 				"text":"UIToast",
