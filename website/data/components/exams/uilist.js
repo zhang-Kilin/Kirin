@@ -18,6 +18,7 @@ require(['UIList'],function(UIList){
 	//监听select事件
 	list.on('select',function(item){
 		alert(item.text);
+		this.hide();
 	});
 
 	//

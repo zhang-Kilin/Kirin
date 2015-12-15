@@ -4,15 +4,18 @@ define('UIList',['react','react-dom','UILayerList','jsx.UIList'],function(React,
 		initialize:function(){
 			$super.initialize.apply(this,arguments);
 			//proxy
-			this.options.onselect = $.proxy(this.options.onselect,this);
-			this.options.oncancel = $.proxy(this.options.oncancel,this);
-			this.options.renderItem = $.proxy(this.options.renderItem,this);			
+			_.isFunction(this.options.onselect) && this.options.onselect.bind(this);
+			_.isFunction(this.options.oncancel) && this.options.oncancel.bind(this);
+			_.isFunction(this.options.renderItem) && this.options.renderItem.bind(this);
+			// this.options.onselect = $.proxy(this.options.onselect,this);
+			// this.options.oncancel = $.proxy(this.options.oncancel,this);
+			// this.options.renderItem = $.proxy(this.options.renderItem,this);			
 		},
 		getDefaults:function(){
 			var defaults = $super.getDefaults.apply(this,arguments);
 			return _.extend(defaults,{
-				onselect:this._onselect,
-				oncancel:this.hide,
+				onselect:this._onselect.bind(this),
+				oncancel:this.hide.bind(this),
 				renderItem:null
 			});
 		},
@@ -21,7 +24,7 @@ define('UIList',['react','react-dom','UILayerList','jsx.UIList'],function(React,
 		},
 		_onselect:function(item){
 			this.trigger('select',item);
-			this.hide();
+			// this.hide();
 		}
 	});
 })
